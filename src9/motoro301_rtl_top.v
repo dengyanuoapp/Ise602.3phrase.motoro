@@ -45,7 +45,7 @@ input   wire                clk50mhz;			// 50MHz
 input   wire                nReset;		// reset button on the core board
 
 wire                        clkUtx ;
-wire                        clkM3;			// 10MHz
+wire                        clk1Mhz;			// 1MHz
 wire    [`busWIDTH:1]            busDefault ;
 
 
@@ -74,7 +74,7 @@ usTop(
     .clkUtx         (   clkUtx          ),
 
     .nRst           (   nReset          ),
-    .clk10mhz       (   clkM3           )
+    .clk10mhz       (   clk1Mhz         )
 );
 
 motoro3_top
@@ -95,15 +95,15 @@ m3t
 
     .nRst           (   nReset          ),
     .clkHI          (   clk50mhz        ),
-    .clk            (   clkM3           )
+    .clk            (   clk1Mhz         )
 );
 
-clkGen_50Mhz_to_10Mhz
+clkGen_50Mhz_to_1Mhz
 cgM3
 (
     .nRst           (   nReset          ),
-    .clk10mhz       (   clkM3           ),
-    .clk50mhz       (   clk50mhz        )
+    .clk1mhzO       (   clk1Mhz         ),
+    .clk50mhzI      (   clk50mhz        )
 );
 
 endmodule
