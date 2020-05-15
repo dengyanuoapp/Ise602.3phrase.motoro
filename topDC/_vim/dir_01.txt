@@ -1,0 +1,2 @@
+srcSYN/src[0-9]/
+srcSYN/tbSrc[0-9]/

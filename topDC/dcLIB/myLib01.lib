@@ -1,0 +1,568 @@
+       library(HML){
+           cell(AND)  {
+           area: 6;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }    
+           pin(B) {
+           direction: input;
+           capacitance: 1;  
+           }
+           pin(Z) {
+           direction: output;
+           function: "A B";
+           timing() {
+           intrinsic_rise: 0.48;
+           intrinsic_fall: 0.77;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0523;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.48;
+           intrinsic_fall: 0.77;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0523;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+           cell(OR) {
+           area:  6;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(B) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(Z) {
+           direction: output;
+           function: "A+B";
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+           cell(XOR) {
+           area: 0;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(B) {
+           direction: input;
+           capacitance: 1
+           }
+           pin(Z) {
+           direction: output;
+           function: "A^B";
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+           cell(NAND) {
+           area: 6;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(B) {
+           direction: input;
+           capacitance: 1
+           }
+           pin(Z) {
+           direction: output;
+           function: "(A B)'";
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+           cell(NOR) {
+           area: 6;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(B) {
+           direction: input;
+           capacitance: 1
+           }
+           pin(Z) {
+           direction: output;
+           function: "(A+B)'";
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+
+           cell(XNOR) {
+           area: 6;
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(B) {
+           direction: input;
+           capacitance: 1
+           }
+           pin(Z) {
+           direction: output;
+           function: "(A^B)'";
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "A";	
+           }
+           timing() {
+           intrinsic_rise: 0.28;
+           intrinsic_fall: 0.85;
+           rise_resistance: 0.1443;
+           fall_resistance: 0.0589;
+           slope_rise: 0.0;
+           slope_fall: 0.0;
+           related_pin: "B";	
+           }
+           }
+           }
+
+           cell(DFF) {
+           area : 9;
+           pin(D) {
+           direction : input;
+           capacitance : 1;
+           timing() {
+           timing_type : setup_rising;
+           intrinsic_rise : 0.85;
+           intrinsic_fall : 0.85;
+           related_pin : "CLK";
+           }
+           timing() {
+           timing_type : hold_rising;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "CLK";
+           }
+           }
+           pin(I) {
+           direction : input;
+           capacitance : 1;
+           timing() {
+           timing_type : setup_rising;
+           intrinsic_rise : 0.85;
+           intrinsic_fall : 0.85;
+           related_pin : "CLK";
+           }
+           timing() {
+           timing_type : hold_rising;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "CLK";
+           }
+           }
+           pin(CLK) {
+           direction : input;
+           capacitance : 1;
+           }
+           pin(RST) {
+           direction : input;
+           capacitance : 2;
+           }
+
+           ff("IQ", "IQN") {
+           next_state : "D";
+           clocked_on : "CLK";
+           clear : "RST (I')";
+           preset: "RST I";
+           clear_preset_var1: L;
+           clear_preset_var2: H;
+           }
+
+           pin(Q) {
+           direction : output;
+           function : "IQ";
+           internal_node : "Q";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.19;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0523;
+           related_pin : "CLK";
+           }
+           timing() {
+           timing_type : clear;
+           timing_sense : positive_unate;
+           intrinsic_fall : 1.29;
+           fall_resistance : 0.0516;
+           related_pin : "RST";
+           }
+           timing() {
+           timing_type : preset;
+           timing_sense : positive_unate;
+           intrinsic_fall : 1.29;
+           fall_resistance : 0.0516;
+           related_pin : "I";
+           }
+           }
+           }
+           cell(MUX) {
+           area:6;
+           pin(SEL) {
+           direction: input;
+           capacitance: 1.0;
+           }
+           pin(IN0) {
+           direction: input;
+           capacitance: 1.0;
+           }
+           pin(IN1) {
+           direction: input;
+           capacitance: 1.0;
+           }
+           pin(F) {
+           direction:output;
+           function: "((SEL IN0) + (SEL' IN1))";
+           timing() {
+           intrinsic_rise : 2.27;
+           intrinsic_fall : 3.81;
+           rise_resistance : 0.43;
+           fall_resistance : 0.19;
+           slope_rise : 0.0;
+           slope_fall : 0.0;
+           related_pin : "SEL";
+           }
+           timing() {
+           intrinsic_rise : 2.27;
+           intrinsic_fall : 3.81;
+           rise_resistance : 0.43;
+           fall_resistance : 0.19;
+           slope_rise : 0.0;
+           slope_fall : 0.0;
+           related_pin : "IN0";
+           }
+           timing() {
+           intrinsic_rise : 2.27;
+           intrinsic_fall : 3.81;
+           rise_resistance : 0.43;
+           fall_resistance : 0.19;
+           slope_rise : 0.0;
+           slope_fall : 0.0;
+           related_pin : "IN1";
+           }
+           }
+           }
+      /*
+           cell(LD1) {
+           area : 5;
+           pin(D) {
+           direction : input;
+           capacitance : 1;
+           timing() {
+           timing_type : setup_falling;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "G";
+           }
+           timing() {
+           timing_type : hold_falling;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "G";
+           }
+           }
+           pin(G) {
+           direction : input;
+           capacitance : 1;
+           }
+
+           latch ("IQ","IQN") {
+           enable : "G";
+           data_in : "D";
+           }
+           statetable ( "  D   G ", " Q  QN") {
+           table  : "  -   L : - - :  N   N, \
+           H/L  H : - - : H/L L/H";
+           }
+
+           pin(Q) {
+           direction : output;
+           function : "IQ";
+           internal_node : "Q";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 0.89;
+           intrinsic_fall : 0.86;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0653;
+           related_pin : "G";
+           }
+           timing() {
+           timing_sense : positive_unate;
+           intrinsic_rise : 0.89;
+           intrinsic_fall : 0.86;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0653;
+           related_pin : "D";
+           }
+           }
+           pin(QN) {
+           direction : output;
+           function : "IQN";
+           internal_node : "QN";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.18;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1443;
+           fall_resistance : 0.0523;
+           related_pin : "G";
+           }
+           timing() {
+           timing_sense : negative_unate;
+           intrinsic_rise : 1.18;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1443;
+           fall_resistance : 0.0523;
+           related_pin : "D";
+           }
+           }
+           } */
+           cell(FD1) {
+           area : 7;
+           pin(D) {
+           direction : input;
+           capacitance : 1;
+           timing() {
+           timing_type : setup_rising;
+           intrinsic_rise : 0.8;
+           intrinsic_fall : 0.8;
+           related_pin : "CP";
+           }
+           timing() {
+           timing_type : hold_rising;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "CP";
+           }
+           }
+           pin(CP) {
+           direction : input;
+           capacitance : 1;
+           }
+
+
+           ff("IQ","IQN") {
+           next_state : "D";
+           clocked_on : "CP";
+           }
+
+           statetable ( "  D   CP ", " Q  QN") {
+           table :"  -  ~R  : - - :  N   N, \
+           H/L  R  : - - : H/L L/H";
+           }
+
+
+           pin(Q) {
+           direction : output;
+           function : "IQ";
+           internal_node : "Q";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.09;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0523;
+           related_pin : "CP";
+           }
+           }
+           pin(QN) {
+           direction : output;
+           function : "IQN";
+           internal_node : "QN";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.59;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0523;
+           related_pin : "CP";
+           }
+           }
+           }
+      /*cell(FD2) {
+           area : 9;
+           pin(D) {
+           direction : input;
+           capacitance : 1;
+           timing() {
+           timing_type : setup_rising;
+           intrinsic_rise : 0.85;
+           intrinsic_fall : 0.85;
+           related_pin : "CP";
+           }
+           timing() {
+           timing_type : hold_rising;
+           intrinsic_rise : 0.4;
+           intrinsic_fall : 0.4;
+           related_pin : "CP";
+           }
+           }
+           pin(CP) {
+           direction : input;
+           capacitance : 1;
+           }
+           pin(CD) {
+           direction : input;
+           capacitance : 2;
+           }
+
+           ff("IQ","IQN") {
+           next_state : "D";
+           clocked_on : "CP";
+           clear   : "CD'";
+           }
+           statetable ( "  D   CP  CD  ", " Q  QN") {
+           table :"  -   -   L   : - - :  L   H, \
+      -  ~R   H   : - - :  N   N, \
+           H/L  R   H   : - - : H/L L/H";
+           }
+
+           pin(Q) {
+           direction : output;
+           function : "IQ";
+           internal_node : "Q";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.19;
+           intrinsic_fall : 1.37;
+           rise_resistance : 0.1458;
+           fall_resistance : 0.0523;
+           related_pin : "CP";
+           }
+           timing() {
+           timing_type : clear;
+           timing_sense : positive_unate;
+           intrinsic_fall : 1.29;
+           fall_resistance : 0.0516;
+           related_pin : "CD";
+           }
+           }
+           pin(QN) {
+           direction : output;
+           function : "IQN";
+           internal_node : "QN";
+           timing() {
+           timing_type : rising_edge;
+           intrinsic_rise : 1.47;
+           intrinsic_fall : 1.67;
+           rise_resistance : 0.1523;
+           fall_resistance : 0.0523;
+           related_pin : "CP";
+           }
+           timing() {
+           timing_type : preset;
+           timing_sense : negative_unate;
+           intrinsic_rise : 1.33;
+           fall_resistance : 0.1482;
+           related_pin : "CD";
+           }
+           }
+           }
+      */
+           cell(IV){
+           area:0;
+           cell_footprint : "iv";
+           pin(A) {
+           direction: input;
+           capacitance: 1;
+           }
+           pin(Z) {
+           direction: output;
+           function : "A'";
+           timing() {
+           intrinsic_rise : 0.38;
+           intrinsic_fall : 0.15;
+           rise_resistance : 0.1443;
+           fall_resistance : 0.0589;
+           slope_rise : 0.0;
+           slope_fall	 : 0.0;
+           related_pin : "A";
+           }
+           }
+           }
+
+           }

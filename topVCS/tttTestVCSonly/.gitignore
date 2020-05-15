@@ -1,0 +1,11 @@
+csrc/
+simv.daidir/
+stack.info.4498/
+simv
+simv.[0-9][0-9][0-9]
+ucli.key
+command.log
+Counter.vcd
+novas_dump.log
+verdi.fsdb
+innovus.log*

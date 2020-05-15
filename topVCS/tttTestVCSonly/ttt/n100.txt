@@ -1,0 +1,44 @@
+#!/bin/bash
+
+LM_LICENSE_FILE=56789@192.168.212.49 \
+    VCS_HOME=/e/eda2321/VCS_2016.06 				\
+    VERDI_HOME=/e/eda2312/verdi_2016.06 	\
+    \
+    /e/eda2301/bin/vcs  		\
+    -debug_access+all \
+    -LDFLAGS -Wl,--no-as-needed \
+    -fPIC   				\
+    +define+simulating=1   			\
+    +incdir+srcSYN/src1  \
+    +incdir+srcSYN/src2  \
+    \
+    +incdir+srcSYN/src3   \
+    +incdir+srcSYN/src4   \
+    +incdir+srcSYN/src5   \
+    +incdir+srcSYN/src6   \
+    +incdir+srcSYN/src7   \
+    +incdir+srcSYN/src8   \
+    +incdir+srcSYN/src9			\
+    \
+    srcSYN/tbSrc1/motoro301_tb.v \
+    srcSYN/src1/clkGen_50Mhz_to_10Mhz.v \
+    srcSYN/src1/uart_clkgen_10mhz_115200.v \
+    srcSYN/src2/led4.v \
+    srcSYN/src3/uart_tx_only.v \
+    srcSYN/src3/uart_tx_top.v \
+    srcSYN/src4/uart_set_show_config_state_machine.v \
+    srcSYN/src5/motoro3_calc_pwm_len.v \
+    srcSYN/src5/motoro3_calc_sine_len_against_to_step.v \
+    srcSYN/src6/motoro3_line_calc_parameter.v \
+    srcSYN/src6/motoro3_mos_driver.v \
+    srcSYN/src6/motoro3_pwm_generator.v \
+    srcSYN/src6/motoro3_step_to_mosdriver.v \
+    srcSYN/src7/motoro3_line_generator.v \
+    srcSYN/src7/motoro3_regs.v \
+    srcSYN/src7/motoro3_step_generator.v \
+    srcSYN/src8/motoro3_real.v \
+    srcSYN/src8/motoro3_top.v \
+    srcSYN/src8/uart_set_show_config_top.v \
+    srcSYN/src9/motoro301_rtl_top.def.inc.v \
+    srcSYN/src9/motoro301_rtl_top.v \
+

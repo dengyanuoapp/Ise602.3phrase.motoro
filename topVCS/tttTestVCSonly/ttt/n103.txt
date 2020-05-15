@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#aa1=\
+#    -full64 -PP +lint=all,noVCDE +v2k -timescale=1ns/10ps \
+#    +define+CLOCK_PERIOD=0.5 \
+
+rm -fr simv simv.daidir/ csrc/
+
+VCS_ARCH_OVERRIDE=linux \
+LM_LICENSE_FILE=56789@127.0.0.1 \
+    VCS_HOME=/e/eda2321/VCS_2018.09 				\
+    \
+    /e/eda2321/VCS_2018.09/bin/vcs  		\
+    \
+    -full64 \
+    \
+    ttt/Counter_tb.v \
+    ttt/Counter.v \
+
+    ./simv

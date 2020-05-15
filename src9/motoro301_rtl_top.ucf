@@ -1,0 +1,56 @@
+
+NET "nReset"    LOC = "p101"  ;
+## NET "buzzer"  LOC = "p123"  ;
+NET "clk50mhz"     LOC = "p184"  ;
+
+NET "led4[0]"  LOC = "p68"  ;
+NET "led4[1]"  LOC = "p78"  ;
+NET "led4[2]"  LOC = "p83"  ;
+NET "led4[3]"  LOC = "p89"  ;
+
+NET "uTx"       LOC = "P123" ;
+
+# NET "m3freq[9]"     LOC = "P153" ;
+# NET "m3freq[8]"     LOC = "P151" ;
+# NET "m3freq[7]"     LOC = "P147" ;
+# NET "m3freq[6]"     LOC = "P145" ;
+# NET "m3freq[5]"     LOC = "P140" ;
+# NET "m3freq[4]"     LOC = "P138" ;
+# NET "m3freq[3]"     LOC = "P135" ;
+# NET "m3freq[2]"     LOC = "P133" ;
+# NET "m3freq[1]"     LOC = "P129" ;
+# NET "m3freq[0]"     LOC = "P127" ;
+NET "m3freqINC"     LOC = "P153" ;
+NET "m3freqDEC"     LOC = "P151" ;
+
+NET "m3start"       LOC = "P160" ;
+NET "m3forceStop"   LOC = "P152" ;
+NET "tp01"          LOC = "P150" ;
+NET "tp02"          LOC = "P146" ;
+NET "m3invRotate"   LOC = "P144" ;
+
+NET "aHP"            LOC = "P49" ;
+NET "bHP"            LOC = "P55" ;
+NET "cHP"            LOC = "P61" ;
+
+NET "aLN"            LOC = "P48" ;
+NET "bLN"            LOC = "P50" ;
+NET "cLN"            LOC = "P60" ;
+
+
+#### DRIVE range : 6,12,24 in LVCOMS33 can be set to , see https://www.xilinx.com/support/documentation/white_papers/wp217.pdf
+
+NET "*" IOSTANDARD = LVCMOS33;
+# NET "tp01" IOSTANDARD = LVCMOS33;
+#  #NET "tp01" SLEW = SLOW;
+#  NET "tp01" SLEW = FAST;
+#  #NET "tp01" DRIVE = 6;
+#  #NET "tp01" DRIVE = 12;
+#  NET "tp01" DRIVE = 24;
+#  
+#  #NET "CLK_8MHz_2" CLOCK_DEDICATED_ROUTE = FALSE;
+#  #NET "CLK_8MHz_2" IOSTANDARD = LVCMOS33;
+#  #NET "CLK_8MHz_2" DRIVE = 12;
+#  #NET "CLK_8MHz_2" SLEW = SLOW;
+#  #NET "CLK_8MHz_2" LOC = P161;
+#  
