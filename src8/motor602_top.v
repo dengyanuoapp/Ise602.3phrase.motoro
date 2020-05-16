@@ -1,4 +1,4 @@
-module motoro3_top(
+module motor602_top(
     aHPo,
     aLNo,
     bHPo,
@@ -110,7 +110,7 @@ always @ (posedge clkI or negedge nRstI) begin
 end
 
 
-motoro3_real
+motor602_real
 r
 (
     .aHpO                   (   aH_ii                   ),

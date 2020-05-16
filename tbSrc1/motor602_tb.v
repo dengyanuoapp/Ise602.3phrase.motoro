@@ -1,7 +1,7 @@
 
 `timescale 10ns / 1ns
 
-module motoro301_tb(
+module motor602_tb(
 );
 
 wire                        aHPw ;	
@@ -26,7 +26,7 @@ wire            [3:0]       led4W;
 reg                         clkR;			// 50MHz
 reg                         nRstR;		// reset button on the core board
 
-motoro301_rtl_top
+motor602_rtl_top
 rtlTop(
     .aHPo            (   aHPw             ),
     .aLNo            (   aLNw             ),
@@ -55,7 +55,7 @@ rtlTop(
 
 initial begin
     $fsdbDumpfile("verdi.fsdb") ;
-    $fsdbDumpvars(0,motoro301_tb) ;
+    $fsdbDumpvars(0,motor602_tb) ;
 end
 
 initial
@@ -108,8 +108,8 @@ assign error13  = ({aLNw,bLNw,cLNw}==3'b001) ;
 assign error14  = ({aLNw,bLNw,cLNw}==3'b000) ;
 assign error19  = error11 | error12 | error13 | error14 ;
 assign error91  = error01 & error19 ;
-//assign error92  = (/motoro301_tb/rtl/m3t/r/lgA/pwmSG/unknowN1)? 1'b1:1'b0 ;
-assign error92  = (rtlTop.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
+//assign error92  = (rtlTop.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
+assign error92  = 1'b0;
 
 
 

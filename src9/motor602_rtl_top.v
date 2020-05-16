@@ -1,6 +1,6 @@
-`include "motoro301_rtl_top.def.inc.v"
+`include "motor602_rtl_top.def.inc.v"
 
-module motoro301_rtl_top(
+module motor602_rtl_top(
     aHPo,
     aLNo,
     bHPo,
@@ -66,7 +66,7 @@ loopLedOnTestBoard(
 assign uTxO = 1'b0 ;
 assign clkUtxW  = 0 ;
 
-motoro3_top
+motor602_top
 m3t
 (
     .aHPo            (   aHPo             ),
