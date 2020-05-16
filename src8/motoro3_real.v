@@ -11,6 +11,8 @@ module motoro3_real(
     m3invRotateI    ,
     m3freqINCi      ,
     m3freqDECi      ,
+    m3powerINCi     ,
+    m3powerDECi     ,
 
     nRstI,
     clkI
@@ -24,21 +26,23 @@ output  wire                bLpO                     ;
 output  wire                cHpO                     ;	
 output  wire                cLpO                     ;	
 
-input   wire                m3startI                ;	
+input   wire                m3startI                 ;	
 
 // if 0 , normal . 
 // if 1 -> force stop ,according to the m3freq : 0 -> forceStop ; or , inverse. 
-input   wire                m3forceStopI            ;	 
-input   wire                m3invRotateI            ;	 
+input   wire                m3forceStopI             ;	 
+input   wire                m3invRotateI             ;	 
 
 // freq 1 - 1000, ==> 60 - 60,000 rpm(round per minutes)
-input   wire                m3freqINCi              ;	 
-input   wire                m3freqDECi              ;	 
+input   wire                m3freqINCi               ;	 
+input   wire                m3freqDECi               ;	 
+input   wire                m3powerINCi              ;	 
+input   wire                m3powerDECi              ;	 
 
-input   wire                clkI                    ;			// 10MHz
-input   wire                nRstI                   ;		
+input   wire                clkI                     ;			// 1MHz
+input   wire                nRstI                    ;		
                                                    
-wire            [1:0]       m3LpwmSplitStep              ;	
+wire            [1:0]       m3LpwmSplitStep          ;	
 wire            [3:0]       m3LstepA                ;	
 wire            [3:0]       m3LstepB                ;	
 wire            [3:0]       m3LstepC                ;	

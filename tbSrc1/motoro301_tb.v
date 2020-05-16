@@ -15,6 +15,8 @@ reg                         m3forceStopR;
 reg                         m3invRotateR;	 
 reg                         m3freqINCr;	 
 reg                         m3freqDECr;	 
+reg                         m3powerINCr;	 
+reg                         m3powerDECr;	 
 
 wire                        tp01w;	
 wire                        tp02w;	
@@ -33,20 +35,22 @@ rtlTop(
     .cHPo            (   cHPw             ),
     .cLNo            (   cLNw             ),
                                        
-    .m3startI       (   m3startR        ),
-    .m3freqINCi     (   m3freqINCr      ),
-    .m3freqDECi     (   m3freqDECr      ),
-    .m3forceStopI   (   m3forceStopR    ),
-    .m3invRotateI   (   m3invRotateR    ),
+    .m3startI        (   m3startR        ),
+    .m3freqINCi      (   m3freqINCr      ),
+    .m3freqDECi      (   m3freqDECr      ),
+    .m3powerINCi     (   m3powerINCr      ),
+    .m3powerDECi     (   m3powerDECr      ),
+    .m3forceStopI    (   m3forceStopR    ),
+    .m3invRotateI    (   m3invRotateR    ),
 
-    .tp01o          (   tp01w           ),
-    .tp02o          (   tp02w           ),
-    .uTxO           (   uTxW            ),
+    .tp01o           (   tp01w           ),
+    .tp02o           (   tp02w           ),
+    .uTxO            (   uTxW            ),
                    
-    .led4O          (   led4W           ),
+    .led4O           (   led4W           ),
                    
-    .nResetI        (   nRstR            ),
-    .clk50mhzI      (   clkR             )
+    .nResetI         (   nRstR            ),
+    .clk50mhzI       (   clkR             )
 );
 
 initial begin
@@ -72,6 +76,8 @@ begin
     m3invRotateR = 0 ;	 
     m3freqINCr   = 0 ;
     m3freqDECr   = 0 ;
+    m3powerINCr   = 0 ;
+    m3powerDECr   = 0 ;
 
     #1
     nRstR = 1;

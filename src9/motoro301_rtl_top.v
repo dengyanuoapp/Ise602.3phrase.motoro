@@ -13,6 +13,8 @@ module motoro301_rtl_top(
     m3invRotateI     ,
     m3freqINCi       ,
     m3freqDECi       ,
+    m3powerINCi       ,
+    m3powerDECi       ,
 
     tp01o,
     tp02o,
@@ -35,6 +37,8 @@ input   wire                m3forceStopI;
 input   wire                m3invRotateI;	 
 input   wire                m3freqINCi;	 
 input   wire                m3freqDECi;	 
+input   wire                m3powerINCi;	 
+input   wire                m3powerDECi;	 
 
 output  wire                tp01o;	
 output  wire                tp02o;	
@@ -75,12 +79,14 @@ m3t
     .m3startI        (   m3startI         ),
     .m3freqINCi      (   m3freqINCi       ),
     .m3freqDECi      (   m3freqDECi       ),
+    .m3powerINCi     (   m3powerINCi      ),
+    .m3powerDECi     (   m3powerDECi      ),
     .m3forceStopI    (   m3forceStopI     ),
     .m3invRotateI    (   m3invRotateI     ),
 
     .nRstI           (   nResetI          ),
     .clkHIi          (   clk50mhzI        ),
-    .clkI           (   clk1MhzW         )
+    .clkI            (   clk1MhzW         )
 );
 
 clkGen_50Mhz_to_1Mhz

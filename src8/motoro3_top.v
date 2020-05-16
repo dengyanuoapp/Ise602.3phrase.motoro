@@ -11,6 +11,8 @@ module motoro3_top(
     m3invRotateI    ,
     m3freqINCi      ,
     m3freqDECi      ,
+    m3powerINCi      ,
+    m3powerDECi      ,
 
     nRstI,
     clkHIi,
@@ -30,6 +32,8 @@ input   wire                m3forceStopI;
 input   wire                m3invRotateI;	 
 input   wire                m3freqINCi	;
 input   wire                m3freqDECi	;
+input   wire                m3powerINCi	;
+input   wire                m3powerDECi	;
 
 input   wire                clkHIi;
 input   wire                clkI;			// 10MHz
@@ -38,8 +42,10 @@ input   wire                nRstI;
 reg                         m3start_clked1       ;	
 reg                         m3forceStop_clked1   ;	 
 reg                         m3invRotate_clked1   ;	 
-reg                         m3freqINC_clked1;	 
-reg                         m3freqDEC_clked1;	 
+reg                         m3freqINC_clked1     ;	 
+reg                         m3freqDEC_clked1     ;	 
+reg                         m3powerINC_clked1    ;	 
+reg                         m3powerDEC_clked1    ;	 
 
 wire                        aH_ii       ;	
 wire                        aL_ii       ;	
@@ -53,6 +59,8 @@ always @ (posedge clkI or negedge nRstI) begin
         m3start_clked1              <= 0                ;
         m3freqINC_clked1            <= 0                ;
         m3freqDEC_clked1            <= 0                ;
+        m3powerINC_clked1           <= 0                ;
+        m3powerDEC_clked1           <= 0                ;
         m3forceStop_clked1          <= 0                ;
         m3invRotate_clked1          <= 0                ;
     end
@@ -60,11 +68,16 @@ always @ (posedge clkI or negedge nRstI) begin
         m3start_clked1              <= m3startI          ;
         m3forceStop_clked1          <= m3forceStopI      ;
         m3invRotate_clked1          <= m3invRotateI      ;
-        m3freqINC_clked1            <= m3freqINCi       ;
-        m3freqDEC_clked1            <= m3freqDECi       ;
+        m3freqINC_clked1            <= m3freqINCi        ;
+        m3freqDEC_clked1            <= m3freqDECi        ;
+        m3powerINC_clked1           <= m3powerINCi       ;
+        m3powerDEC_clked1           <= m3powerDECi       ;
 
         if ( m3freqINCi== 1'b1 ) begin
             m3freqDEC_clked1        <= 1'b0             ;
+        end
+        if ( m3powerINCi== 1'b1 ) begin
+            m3powerDEC_clked1        <= 1'b0             ;
         end
     end
 end
@@ -110,6 +123,8 @@ r
     .m3startI               (   m3start_clked1          ),
     .m3freqINCi             (   m3freqINC_clked1        ),
     .m3freqDECi             (   m3freqDEC_clked1        ),
+    .m3powerINCi            (   m3powerINC_clked1       ),
+    .m3powerDECi            (   m3powerDEC_clked1       ),
     .m3forceStopI           (   m3forceStop_clked1      ),
     .m3invRotateI           (   m3invRotate_clked1      ),
                            
