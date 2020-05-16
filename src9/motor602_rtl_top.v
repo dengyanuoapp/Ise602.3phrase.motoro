@@ -21,7 +21,7 @@ module motor602_rtl_top(
     uTxO,
 
     led4O,
-    nResetI,
+    nRstI  ,
     clk50mhzI
 
 );
@@ -46,28 +46,28 @@ output  wire                uTxO;
 
 output  wire    [3:0]       led4O;	
 input   wire                clk50mhzI;			// 50MHz
-input   wire                nResetI;		// reset button on the core board
+input   wire                nRstI  ;		// reset button on the core board
 
 wire                        clkUtxW ;
 wire                        clk1MhzW;			// 1MHz
 wire    [`busWIDTH:1]            busDefault ;
 
 
-//assign {tp01o , tp02o } = { nResetI , ~nResetI };
+//assign {tp01o , tp02o } = { nRstI   , ~nRstI   };
 assign {tp01o , tp02o } = { clkUtxW , ~clkUtxW };
 
 led4
 loopLedOnTestBoard(
     .led4O          (   led4O        ),
 
-    .nRstI          (   nResetI      ),
+    .nRstI          (   nRstI        ),
     .clkI           (   clk50mhzI    )
 );
 assign uTxO = 1'b0 ;
 assign clkUtxW  = 0 ;
 
 motor602_top
-m3t
+m3top
 (
     .aHPo            (   aHPo             ),
     .aLNo            (   aLNo             ),
@@ -84,7 +84,7 @@ m3t
     .m3forceStopI    (   m3forceStopI     ),
     .m3invRotateI    (   m3invRotateI     ),
 
-    .nRstI           (   nResetI          ),
+    .nRstI           (   nRstI            ),
     .clkHIi          (   clk50mhzI        ),
     .clkI            (   clk1MhzW         )
 );
@@ -92,7 +92,7 @@ m3t
 clkGen_50Mhz_to_1Mhz
 ckGen
 (
-    .nRstI           (   nResetI          ),
+    .nRstI           (   nRstI            ),
     .clk1mhzO       (   clk1MhzW         ),
     .clk50mhzI      (   clk50mhzI        )
 );

@@ -49,7 +49,7 @@ rtlTop(
                    
     .led4O           (   led4W           ),
                    
-    .nResetI         (   nRstR            ),
+    .nRstI           (   nRstR            ),
     .clk50mhzI       (   clkR             )
 );
 
