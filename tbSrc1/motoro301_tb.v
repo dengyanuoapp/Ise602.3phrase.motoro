@@ -4,49 +4,49 @@
 module motoro301_tb(
 );
 
-wire                        aHP ;	
-wire                        aLN ;	
-wire                        bHP ;	
-wire                        bLN ;	
-wire                        cHP ;	
-wire                        cLN ;	
-reg                         m3start;	
-reg                         m3forceStop;	 
-reg                         m3invRotate;	 
-reg                         m3freqINC;	 
-reg                         m3freqDEC;	 
+wire                        aHPw ;	
+wire                        aLNw ;	
+wire                        bHPw ;	
+wire                        bLNw ;	
+wire                        cHPw ;	
+wire                        cLNw ;	
+reg                         m3startR;	
+reg                         m3forceStopR;	 
+reg                         m3invRotateR;	 
+reg                         m3freqINCr;	 
+reg                         m3freqDECr;	 
 
-wire                        tp01;	
-wire                        tp02;	
-wire                        uTx;	
+wire                        tp01w;	
+wire                        tp02w;	
+wire                        uTxW;	
 
-wire            [3:0]       led4;	
-reg                         clk;			// 50MHz
-reg                         nRst;		// reset button on the core board
+wire            [3:0]       led4W;	
+reg                         clkR;			// 50MHz
+reg                         nRstR;		// reset button on the core board
 
 motoro301_rtl_top
 rtl(
-    .aHP             (   aHP              ),
-    .aLN             (   aLN              ),
-    .bHP             (   bHP              ),
-    .bLN             (   bLN              ),
-    .cHP             (   cHP              ),
-    .cLN             (   cLN              ),
+    .aHPo            (   aHPw             ),
+    .aLNo            (   aLNw             ),
+    .bHPo            (   bHPw             ),
+    .bLNo            (   bLNw             ),
+    .cHPo            (   cHPw             ),
+    .cLNo            (   cLNw             ),
                                        
-    .m3start        (   m3start         ),
-    .m3freqINC      (   m3freqINC       ),
-    .m3freqDEC      (   m3freqDEC       ),
-    .m3forceStop    (   m3forceStop     ),
-    .m3invRotate    (   m3invRotate     ),
+    .m3startI       (   m3startR        ),
+    .m3freqINCi     (   m3freqINCr      ),
+    .m3freqDECi     (   m3freqDECr      ),
+    .m3forceStopI   (   m3forceStopR    ),
+    .m3invRotateI   (   m3invRotateR    ),
 
-    .tp01           (   tp01            ),
-    .tp02           (   tp02            ),
-    .uTx            (   uTx             ),
+    .tp01o          (   tp01w           ),
+    .tp02o          (   tp02w           ),
+    .uTxO           (   uTxW            ),
                    
-    .led4           (   led4            ),
+    .led4O          (   led4W           ),
                    
-    .nReset         (   nRst            ),
-    .clk50mhz       (   clk             )
+    .nResetI        (   nRstR            ),
+    .clk50mhzI      (   clkR             )
 );
 
 initial begin
@@ -61,23 +61,23 @@ begin
 //    $dumpvars(0, Counter_tb);
 
     #1
-    clk = 0;
-    nRst = 1;
+    clkR = 0;
+    nRstR = 1;
 
     #1
-    nRst = 0;
+    nRstR = 0;
 
-    m3start = 0;	
-    m3forceStop = 0 ;	 
-    m3invRotate = 0 ;	 
-    m3freqINC   = 0 ;
-    m3freqDEC   = 0 ;
+    m3startR = 0;	
+    m3forceStopR = 0 ;	 
+    m3invRotateR = 0 ;	 
+    m3freqINCr   = 0 ;
+    m3freqDECr   = 0 ;
 
     #1
-    nRst = 1;
+    nRstR = 1;
 
     #10
-    m3start = 1;	
+    m3startR = 1;	
 
     #1_200_000      // 12ms
     #1_200_000      // 12ms
@@ -91,14 +91,14 @@ begin
 end
 
 always begin
-    #1 clk = !clk ;
+    #1 clkR = !clkR ;
 end
 
-assign error01  = ({aHP,bHP,cHP}==3'b000) ;
-assign error11  = ({aLN,bLN,cLN}==3'b100) ;
-assign error12  = ({aLN,bLN,cLN}==3'b010) ;
-assign error13  = ({aLN,bLN,cLN}==3'b001) ;
-assign error14  = ({aLN,bLN,cLN}==3'b000) ;
+assign error01  = ({aHPw,bHPw,cHPw}==3'b000) ;
+assign error11  = ({aLNw,bLNw,cLNw}==3'b100) ;
+assign error12  = ({aLNw,bLNw,cLNw}==3'b010) ;
+assign error13  = ({aLNw,bLNw,cLNw}==3'b001) ;
+assign error14  = ({aLNw,bLNw,cLNw}==3'b000) ;
 assign error19  = error11 | error12 | error13 | error14 ;
 assign error91  = error01 & error19 ;
 //assign error92  = (/motoro301_tb/rtl/m3t/r/lgA/pwmSG/unknowN1)? 1'b1:1'b0 ;

@@ -1,39 +1,39 @@
 module motoro3_top(
-    aHP,
-    aLN,
-    bHP,
-    bLN,
-    cHP,
-    cLN,
+    aHPo,
+    aLNo,
+    bHPo,
+    bLNo,
+    cHPo,
+    cLNo,
 
-    m3start         ,
-    m3forceStop     ,
-    m3invRotate     ,
-    m3freqINC       ,
-    m3freqDEC       ,
+    m3startI        ,
+    m3forceStopI    ,
+    m3invRotateI    ,
+    m3freqINCi      ,
+    m3freqDECi      ,
 
-    nRst,
-    clkHI,
-    clk
+    nRstI,
+    clkHIi,
+    clkI
 
 );
 
-output  reg                 aHP ;	
-output  reg                 aLN ;	
-output  reg                 bHP ;	
-output  reg                 bLN ;	
-output  reg                 cHP ;	
-output  reg                 cLN ;	
+output  reg                 aHPo ;	
+output  reg                 aLNo ;	
+output  reg                 bHPo ;	
+output  reg                 bLNo ;	
+output  reg                 cHPo ;	
+output  reg                 cLNo ;	
 
-input   wire                m3start;	
-input   wire                m3forceStop;	 
-input   wire                m3invRotate;	 
-input   wire                m3freqINC;	 
-input   wire                m3freqDEC;	 
+input   wire                m3startI;	
+input   wire                m3forceStopI;	 
+input   wire                m3invRotateI;	 
+input   wire                m3freqINCi	;
+input   wire                m3freqDECi	;
 
-input   wire                clkHI;
-input   wire                clk;			// 10MHz
-input   wire                nRst;		
+input   wire                clkHIi;
+input   wire                clkI;			// 10MHz
+input   wire                nRstI;		
 
 reg                         m3start_clked1       ;	
 reg                         m3forceStop_clked1   ;	 
@@ -48,8 +48,8 @@ wire                        bL_ii       ;
 wire                        cH_ii       ;	
 wire                        cL_ii       ;	
 
-always @ (posedge clk or negedge nRst) begin
-    if(!nRst) begin
+always @ (posedge clkI or negedge nRstI) begin
+    if(!nRstI) begin
         m3start_clked1              <= 0                ;
         m3freqINC_clked1            <= 0                ;
         m3freqDEC_clked1            <= 0                ;
@@ -57,13 +57,13 @@ always @ (posedge clk or negedge nRst) begin
         m3invRotate_clked1          <= 0                ;
     end
     else begin
-        m3start_clked1              <= m3start          ;
-        m3forceStop_clked1          <= m3forceStop      ;
-        m3invRotate_clked1          <= m3invRotate      ;
-        m3freqINC_clked1            <= m3freqINC        ;
-        m3freqDEC_clked1            <= m3freqDEC        ;
+        m3start_clked1              <= m3startI          ;
+        m3forceStop_clked1          <= m3forceStopI      ;
+        m3invRotate_clked1          <= m3invRotateI      ;
+        m3freqINC_clked1            <= m3freqINCi       ;
+        m3freqDEC_clked1            <= m3freqDECi       ;
 
-        if ( m3freqINC == 1'b1 ) begin
+        if ( m3freqINCi== 1'b1 ) begin
             m3freqDEC_clked1        <= 1'b0             ;
         end
     end
@@ -76,23 +76,23 @@ end
 `define Benable     1'b1
 `define Cenable     1'b1
 
-always @ (posedge clk or negedge nRst) begin
-    if(!nRst) begin
-        aHP                         <= 0                ;
-        bHP                         <= 0                ;
-        cHP                         <= 0                ;
-        aLN                         <= 0 `LOWmosINV     ;
-        bLN                         <= 0 `LOWmosINV     ;
-        cLN                         <= 0 `LOWmosINV     ;
+always @ (posedge clkI or negedge nRstI) begin
+    if(!nRstI) begin
+        aHPo                         <= 0                ;
+        bHPo                         <= 0                ;
+        cHPo                         <= 0                ;
+        aLNo                         <= 0 `LOWmosINV     ;
+        bLNo                         <= 0 `LOWmosINV     ;
+        cLNo                         <= 0 `LOWmosINV     ;
     end
     else begin
-        aHP                         <= ( aH_ii & `Aenable )       ;
-        bHP                         <= ( bH_ii & `Benable )       ;
-        cHP                         <= ( cH_ii & `Cenable )       ;
+        aHPo                         <= ( aH_ii & `Aenable )       ;
+        bHPo                         <= ( bH_ii & `Benable )       ;
+        cHPo                         <= ( cH_ii & `Cenable )       ;
 
-        aLN                         <= ( aL_ii & `Aenable )  `LOWmosINV          ;
-        bLN                         <= ( bL_ii & `Benable )  `LOWmosINV          ;
-        cLN                         <= ( cL_ii & `Cenable )  `LOWmosINV          ;
+        aLNo                         <= ( aL_ii & `Aenable )  `LOWmosINV          ;
+        bLNo                         <= ( bL_ii & `Benable )  `LOWmosINV          ;
+        cLNo                         <= ( cL_ii & `Cenable )  `LOWmosINV          ;
     end
 end
 
@@ -113,8 +113,8 @@ r
     .m3forceStop            (   m3forceStop_clked1      ),
     .m3invRotate            (   m3invRotate_clked1      ),
                            
-    .nRst                   (   nRst                    ),
-    .clk                    (   clk                     )
+    .nRst                   (   nRstI                   ),
+    .clk                    (   clkI                    )
 );
 
 endmodule

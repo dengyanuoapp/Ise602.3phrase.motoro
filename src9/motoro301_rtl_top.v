@@ -1,63 +1,63 @@
 `include "motoro301_rtl_top.def.inc.v"
 
 module motoro301_rtl_top(
-    aHP,
-    aLN,
-    bHP,
-    bLN,
-    cHP,
-    cLN,
+    aHPo,
+    aLNo,
+    bHPo,
+    bLNo,
+    cHPo,
+    cLNo,
 
-    m3start         ,
-    m3forceStop     ,
-    m3invRotate     ,
-    m3freqINC       ,
-    m3freqDEC       ,
+    m3startI         ,
+    m3forceStopI     ,
+    m3invRotateI     ,
+    m3freqINCi       ,
+    m3freqDECi       ,
 
-    tp01,
-    tp02,
-    uTx,
+    tp01o,
+    tp02o,
+    uTxO,
 
-    led4,
-    nReset,
-    clk50mhz
+    led4O,
+    nResetI,
+    clk50mhzI
 
 );
 
-output  wire                aHP ;	
-output  wire                aLN ;	
-output  wire                bHP ;	
-output  wire                bLN ;	
-output  wire                cHP ;	
-output  wire                cLN ;	
-input   wire                m3start;	
-input   wire                m3forceStop;	 
-input   wire                m3invRotate;	 
-input   wire                m3freqINC;	 
-input   wire                m3freqDEC;	 
+output  wire                aHPo ;	
+output  wire                aLNo ;	
+output  wire                bHPo ;	
+output  wire                bLNo ;	
+output  wire                cHPo ;	
+output  wire                cLNo ;	
+input   wire                m3startI;	
+input   wire                m3forceStopI;	 
+input   wire                m3invRotateI;	 
+input   wire                m3freqINCi;	 
+input   wire                m3freqDECi;	 
 
-output  wire                tp01;	
-output  wire                tp02;	
-output  wire                uTx;	
+output  wire                tp01o;	
+output  wire                tp02o;	
+output  wire                uTxO;	
 
-output  wire    [3:0]       led4;	
-input   wire                clk50mhz;			// 50MHz
-input   wire                nReset;		// reset button on the core board
+output  wire    [3:0]       led4O;	
+input   wire                clk50mhzI;			// 50MHz
+input   wire                nResetI;		// reset button on the core board
 
-wire                        clkUtx ;
-wire                        clk1Mhz;			// 1MHz
+wire                        clkUtxW ;
+wire                        clk1MhzW;			// 1MHz
 wire    [`busWIDTH:1]            busDefault ;
 
 
-//assign {tp01 , tp02 } = { nReset , ~nReset };
-assign {tp01 , tp02 } = { clkUtx , ~clkUtx };
+//assign {tp01o , tp02o } = { nResetI , ~nResetI };
+assign {tp01o , tp02o } = { clkUtxW , ~clkUtxW };
 
 led4
 ledTop(
-    .led            (   led4        ),
+    .led            (   led4O        ),
 
-    .nRst           (   nReset      ),
-    .clk            (   clk50mhz    )
+    .nRst           (   nResetI      ),
+    .clk            (   clk50mhzI    )
 );
 
 uart_set_show_config_top
@@ -70,40 +70,40 @@ usTop(
     } ),
     .busNow         (                   ),
 
-    .uTx            (   uTx             ),
-    .clkUtx         (   clkUtx          ),
+    .uTx             (   uTxO             ),
+    .clkUtx         (   clkUtxW          ),
 
-    .nRst           (   nReset          ),
-    .clk10mhz       (   clk1Mhz         )
+    .nRst           (   nResetI          ),
+    .clk10mhz       (   clk1MhzW         )
 );
 
 motoro3_top
 m3t
 (
-    .aHP            (   aHP             ),
-    .aLN            (   aLN             ),
-    .bHP            (   bHP             ),
-    .bLN            (   bLN             ),
-    .cHP            (   cHP             ),
-    .cLN            (   cLN             ),
+    .aHPo            (   aHPo             ),
+    .aLNo            (   aLNo             ),
+    .bHPo            (   bHPo             ),
+    .bLNo            (   bLNo             ),
+    .cHPo            (   cHPo             ),
+    .cLNo            (   cLNo             ),
                                        
-    .m3start        (   m3start         ),
-    .m3freqINC      (   m3freqINC       ),
-    .m3freqDEC      (   m3freqDEC       ),
-    .m3forceStop    (   m3forceStop     ),
-    .m3invRotate    (   m3invRotate     ),
+    .m3startI        (   m3startI         ),
+    .m3freqINCi      (   m3freqINCi       ),
+    .m3freqDECi      (   m3freqDECi       ),
+    .m3forceStopI    (   m3forceStopI     ),
+    .m3invRotateI    (   m3invRotateI     ),
 
-    .nRst           (   nReset          ),
-    .clkHI          (   clk50mhz        ),
-    .clk            (   clk1Mhz         )
+    .nRstI           (   nResetI          ),
+    .clkHIi          (   clk50mhzI        ),
+    .clkI           (   clk1MhzW         )
 );
 
 clkGen_50Mhz_to_1Mhz
 cgM3
 (
-    .nRst           (   nReset          ),
-    .clk1mhzO       (   clk1Mhz         ),
-    .clk50mhzI      (   clk50mhz        )
+    .nRstI           (   nResetI          ),
+    .clk1mhzO       (   clk1MhzW         ),
+    .clk50mhzI      (   clk50mhzI        )
 );
 
 endmodule
