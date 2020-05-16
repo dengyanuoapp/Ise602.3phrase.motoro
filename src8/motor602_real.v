@@ -44,21 +44,27 @@ input   wire                nRstI                    ;
 
 motor3_irs2007s_driver
 irsA(
-    .HinO            ( aHpO ),
-    .nLinO           ( aLpO ),
-    .down1_up2i      ( 2'd0 )
+    .HinO            ( aHpO  ),
+    .nLinO           ( aLpO  ),
+    .clkI            ( clkI  ),
+    .nRstI           ( nRstI ),
+    .down1_up2i      ( 2'd0  )
 );
 motor3_irs2007s_driver
 irsB(
-    .HinO            ( bHpO ),
-    .nLinO           ( bLpO ),
-    .down1_up2i      ( 2'd0 )
+    .HinO            ( bHpO  ),
+    .nLinO           ( bLpO  ),
+    .clkI            ( clkI  ),
+    .nRstI           ( nRstI ),
+    .down1_up2i      ( 2'd0  )
 );
 motor3_irs2007s_driver
 irsC(
-    .HinO            ( cHpO ),
-    .nLinO           ( cLpO ),
-    .down1_up2i      ( 2'd0 )
+    .HinO            ( cHpO  ),
+    .nLinO           ( cLpO  ),
+    .clkI            ( clkI  ),
+    .nRstI           ( nRstI ),
+    .down1_up2i      ( 2'd0  )
 );
                                                    
 
