@@ -9,23 +9,27 @@ output  reg                 clk1mhzO ;
 input   wire                nRst;		
 input   wire                clk50mhzI;
 
-reg     [3:0]               cnt ;	
-
+//  4 == 3'b100
+// 24 == 5'b11000
+// 23 == 5'b10111
+// 49 == 6'b110001
+`define CLOCK_max       6'd23
+`define CLOCK_zero      6'd0
+`define CLOCK_one       6'd1
+`define CLOCK_mBit      5
+reg     [5:0]               cnt ;	
 always @ (negedge clk50mhzI or negedge nRst) begin
     if(!nRst) begin
-        cnt                 <= 4'd4 ;
+        cnt                 <= `CLOCK_max ;
         clk1mhzO            <= 1'b0 ;
     end
     else begin
-        if ( cnt == 4'd0 ) begin
-            cnt             <= 4'd4 ;
-            clk1mhzO        <= 1'b0 ;
+        if ( 1'b1 == cnt[`CLOCK_mBit] ) begin
+            cnt             <= `CLOCK_max ;
+            clk1mhzO        <=  ~clk1mhzO ;
         end 
         else begin
-            if ( cnt == 4'd2 ) begin
-                clk1mhzO    <= 1'b1 ;
-            end 
-            cnt             <= cnt - 4'd1 ;
+            cnt             <= cnt - `CLOCK_one ;
         end
     end
 end
