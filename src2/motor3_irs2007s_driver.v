@@ -18,8 +18,10 @@ always @ ( down1_up2i ) begin
     if ( down1_up2i == 2'd1 ) begin
         nLinO       = 1'b0 ;
     end 
-    if ( down1_up2i == 2'd2 ) begin
-        HinO        = 1'b1 ;
+    else begin
+        if ( down1_up2i == 2'd2 ) begin
+            HinO        = 1'b1 ;
+        end 
     end 
 end
 

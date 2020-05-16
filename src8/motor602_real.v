@@ -43,9 +43,21 @@ input   wire                clkI                     ;			// 1MHz
 input   wire                nRstI                    ;		
 
 motor3_irs2007s_driver
-aIrs(
+irsA(
     .HinO            ( aHpO ),
     .nLinO           ( aLpO ),
+    .down1_up2i      ( 2'd0 )
+);
+motor3_irs2007s_driver
+irsB(
+    .HinO            ( bHpO ),
+    .nLinO           ( bLpO ),
+    .down1_up2i      ( 2'd0 )
+);
+motor3_irs2007s_driver
+irsC(
+    .HinO            ( cHpO ),
+    .nLinO           ( cLpO ),
     .down1_up2i      ( 2'd0 )
 );
                                                    
