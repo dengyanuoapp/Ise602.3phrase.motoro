@@ -25,7 +25,7 @@ reg                         clkR;			// 50MHz
 reg                         nRstR;		// reset button on the core board
 
 motoro301_rtl_top
-rtl(
+rtlTop(
     .aHPo            (   aHPw             ),
     .aLNo            (   aLNw             ),
     .bHPo            (   bHPw             ),
@@ -84,8 +84,9 @@ begin
 //    #7_200_000      // 12ms
     #9_600_000      // 12ms
 `ifdef simulating
+    #20_000_000       // 200ms
 `endif
-    //#10_000_000      // 100ms
+    //#10_000_000     // 100ms
     //#100_000_000    // 1s
     $finish;
 end
@@ -102,7 +103,7 @@ assign error14  = ({aLNw,bLNw,cLNw}==3'b000) ;
 assign error19  = error11 | error12 | error13 | error14 ;
 assign error91  = error01 & error19 ;
 //assign error92  = (/motoro301_tb/rtl/m3t/r/lgA/pwmSG/unknowN1)? 1'b1:1'b0 ;
-assign error92  = (rtl.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
+assign error92  = (rtlTop.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
 
 
 

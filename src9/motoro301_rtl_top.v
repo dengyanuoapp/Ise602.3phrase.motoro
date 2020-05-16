@@ -53,29 +53,14 @@ wire    [`busWIDTH:1]            busDefault ;
 assign {tp01o , tp02o } = { clkUtxW , ~clkUtxW };
 
 led4
-ledTop(
-    .led            (   led4O        ),
+loopLedOnTestBoard(
+    .led4O          (   led4O        ),
 
-    .nRst           (   nResetI      ),
-    .clk            (   clk50mhzI    )
+    .nRstI          (   nResetI      ),
+    .clkI           (   clk50mhzI    )
 );
-
-uart_set_show_config_top
-usTop(
-    .busDefault     ( { 
-        `m3pos1_neg0 , 
-        `m3perCent , 
-        `m3speedRoundPerSecondH8 , 
-        `m3speedRoundPerSecondL8 
-    } ),
-    .busNow         (                   ),
-
-    .uTx             (   uTxO             ),
-    .clkUtx         (   clkUtxW          ),
-
-    .nRst           (   nResetI          ),
-    .clk10mhz       (   clk1MhzW         )
-);
+assign uTxO = 1'b0 ;
+assign clkUtxW  = 0 ;
 
 motoro3_top
 m3t
@@ -99,7 +84,7 @@ m3t
 );
 
 clkGen_50Mhz_to_1Mhz
-cgM3
+ckGen
 (
     .nRstI           (   nResetI          ),
     .clk1mhzO       (   clk1MhzW         ),
