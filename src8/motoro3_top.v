@@ -100,21 +100,21 @@ end
 motoro3_real
 r
 (
-    .aHp                    (   aH_ii                   ),
-    .aLp                    (   aL_ii                   ),
-    .bHp                    (   bH_ii                   ),
-    .bLp                    (   bL_ii                   ),
-    .cHp                    (   cH_ii                   ),
-    .cLp                    (   cL_ii                   ),
+    .aHpO                   (   aH_ii                   ),
+    .aLpO                   (   aL_ii                   ),
+    .bHpO                   (   bH_ii                   ),
+    .bLpO                   (   bL_ii                   ),
+    .cHpO                   (   cH_ii                   ),
+    .cLpO                   (   cL_ii                   ),
                                                
-    .m3start                (   m3start_clked1          ),
-    .m3freqINC              (   m3freqINC_clked1        ),
-    .m3freqDEC              (   m3freqDEC_clked1        ),
-    .m3forceStop            (   m3forceStop_clked1      ),
-    .m3invRotate            (   m3invRotate_clked1      ),
+    .m3startI               (   m3start_clked1          ),
+    .m3freqINCi             (   m3freqINC_clked1        ),
+    .m3freqDECi             (   m3freqDEC_clked1        ),
+    .m3forceStopI           (   m3forceStop_clked1      ),
+    .m3invRotateI           (   m3invRotate_clked1      ),
                            
-    .nRst                   (   nRstI                   ),
-    .clk                    (   clkI                    )
+    .nRstI                  (   nRstI                   ),
+    .clkI                   (   clkI                    )
 );
 
 endmodule

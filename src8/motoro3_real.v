@@ -1,42 +1,42 @@
 module motoro3_real(
-    aHp,
-    aLp,
-    bHp,
-    bLp,
-    cHp,
-    cLp,
+    aHpO,
+    aLpO,
+    bHpO,
+    bLpO,
+    cHpO,
+    cLpO,
 
-    m3start         ,
-    m3forceStop     ,
-    m3invRotate     ,
-    m3freqINC       ,
-    m3freqDEC       ,
+    m3startI        ,
+    m3forceStopI    ,
+    m3invRotateI    ,
+    m3freqINCi      ,
+    m3freqDECi      ,
 
-    nRst,
-    clk
+    nRstI,
+    clkI
 
 );
 
-output  wire                aHp                     ;	
-output  wire                aLp                     ;	
-output  wire                bHp                     ;	
-output  wire                bLp                     ;	
-output  wire                cHp                     ;	
-output  wire                cLp                     ;	
+output  wire                aHpO                     ;	
+output  wire                aLpO                     ;	
+output  wire                bHpO                     ;	
+output  wire                bLpO                     ;	
+output  wire                cHpO                     ;	
+output  wire                cLpO                     ;	
 
-input   wire                m3start                 ;	
+input   wire                m3startI                ;	
 
 // if 0 , normal . 
 // if 1 -> force stop ,according to the m3freq : 0 -> forceStop ; or , inverse. 
-input   wire                m3forceStop             ;	 
-input   wire                m3invRotate             ;	 
+input   wire                m3forceStopI            ;	 
+input   wire                m3invRotateI            ;	 
 
 // freq 1 - 1000, ==> 60 - 60,000 rpm(round per minutes)
-input   wire                m3freqINC               ;	 
-input   wire                m3freqDEC               ;	 
+input   wire                m3freqINCi              ;	 
+input   wire                m3freqDECi              ;	 
 
-input   wire                clk                     ;			// 10MHz
-input   wire                nRst                    ;		
+input   wire                clkI                    ;			// 10MHz
+input   wire                nRstI                   ;		
                                                    
 wire            [1:0]       m3LpwmSplitStep              ;	
 wire            [3:0]       m3LstepA                ;	
@@ -67,8 +67,8 @@ m3reg
     .m3r_pwmMinMask         ( m3r_pwmMinMask            ),
     .m3r_stepSplitMax       ( m3r_stepSplitMax          ),
 
-    .nRst                   ( nRst                      ),
-    .clk                    ( clk                       )
+    .nRst                   ( nRstI                     ),
+    .clk                    ( clkI                      )
 );// motoro3_state_machine
 
 motoro3_step_generator
@@ -89,14 +89,14 @@ sg
     .m3cntLast2             ( m3cntLast2                ),
     .m3cntFirst1            ( m3cntFirst1               ),
     .m3cntFirst2            ( m3cntFirst2               ),
-    .m3start                ( m3start                   ),
-    .m3freqINC              ( m3freqINC                 ),
-    .m3freqDEC              ( m3freqDEC                 ),
+    .m3start                ( m3startI                  ),
+    .m3freqINC              ( m3freqINCi                ),
+    .m3freqDEC              ( m3freqDECi                ),
 
     .m3r_stepCNT_speedSET   ( m3r_stepCNT_speedSET      ),
 
-    .nRst                   ( nRst                      ),
-    .clk                    ( clk                       )
+    .nRst                   ( nRstI                     ),
+    .clk                    ( clkI                      )
 );// motoro3_state_machine
 
 motoro3_line_generator
@@ -110,8 +110,8 @@ lgA
     .posSumExtC             ( posSumExtCC               ),
     .m3LpwmSplitStep        ( m3LpwmSplitStep           ),
     .lgStep                 ( m3LstepA                  ),
-    .lgHp                   ( aHp                       ),
-    .lgLp                   ( aLp                       ),
+    .lgHp                   ( aHpO                       ),
+    .lgLp                   ( aLpO                       ),
 
     .m3cnt                  ( m3cnt                     ),
     .m3cntLast1             ( m3cntLast1                ),
@@ -125,8 +125,8 @@ lgA
     .m3r_pwmMinMask         ( m3r_pwmMinMask            ),
     .m3r_stepSplitMax       ( m3r_stepSplitMax          ),
 
-    .nRst                   ( nRst                      ),
-    .clk                    ( clk                       )  
+    .nRst                   ( nRstI                     ),
+    .clk                    ( clkI                      )  
 );// motoro3_line_generator lgA
 motoro3_line_generator
 lgB
@@ -139,8 +139,8 @@ lgB
     .posSumExtC             ( posSumExtAA               ),
     .m3LpwmSplitStep        ( m3LpwmSplitStep           ),
     .lgStep                 ( m3LstepB                  ),
-    .lgHp                   ( bHp                       ),
-    .lgLp                   ( bLp                       ),
+    .lgHp                   ( bHpO                       ),
+    .lgLp                   ( bLpO                       ),
 
     .m3cnt                  ( m3cnt                     ),
     .m3cntLast1             ( m3cntLast1                ),
@@ -154,8 +154,8 @@ lgB
     .m3r_pwmMinMask         ( m3r_pwmMinMask            ),
     .m3r_stepSplitMax       ( m3r_stepSplitMax          ),
 
-    .nRst                   ( nRst                      ),
-    .clk                    ( clk                       )  
+    .nRst                   ( nRstI                     ),
+    .clk                    ( clkI                      )  
 );// motoro3_line_generator lgB
 motoro3_line_generator
 lgC
@@ -168,8 +168,8 @@ lgC
     .posSumExtC             ( posSumExtBB               ),
     .m3LpwmSplitStep        ( m3LpwmSplitStep           ),
     .lgStep                 ( m3LstepC                  ),
-    .lgHp                   ( cHp                       ),
-    .lgLp                   ( cLp                       ),
+    .lgHp                   ( cHpO                       ),
+    .lgLp                   ( cLpO                       ),
 
     .m3cnt                  ( m3cnt                     ),
     .m3cntLast1             ( m3cntLast1                ),
@@ -183,8 +183,8 @@ lgC
     .m3r_pwmMinMask         ( m3r_pwmMinMask            ),
     .m3r_stepSplitMax       ( m3r_stepSplitMax          ),
 
-    .nRst                   ( nRst                      ),
-    .clk                    ( clk                       )  
+    .nRst                   ( nRstI                     ),
+    .clk                    ( clkI                      )  
 );// motoro3_line_generator lgC
 
 endmodule
