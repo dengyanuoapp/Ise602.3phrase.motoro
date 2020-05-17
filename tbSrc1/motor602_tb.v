@@ -54,7 +54,7 @@ module motor602_tb(
     );
 
     initial begin
-        $fsdbDumpfile("verdi.fsdb") ;
+        $fsdbDumpfile("/tmp/verdi.fsdb") ;
         $fsdbDumpvars(0,motor602_tb) ;
     end
 
