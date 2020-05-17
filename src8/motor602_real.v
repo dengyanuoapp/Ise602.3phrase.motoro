@@ -1,23 +1,23 @@
 module motor602_real(
-    aHpO,
-    aLpO,
-    bHpO,
-    bLpO,
-    cHpO,
-    cLpO,
+		aHpO,
+		aLpO,
+		bHpO,
+		bLpO,
+		cHpO,
+		cLpO,
 
-    m3startI        ,
-    m3forceStopI    ,
-    m3invRotateI    ,
-    m3freqINCi      ,
-    m3freqDECi      ,
-    m3powerINCi     ,
-    m3powerDECi     ,
+		m3startI        ,
+		m3forceStopI    ,
+		m3invRotateI    ,
+		m3freqINCi      ,
+		m3freqDECi      ,
+		m3powerINCi     ,
+		m3powerDECi     ,
 
-    nRstI,
-    clkI
+		nRstI,
+		clkI
 
-);
+		);
 
 output  wire                aHpO                     ;	
 output  wire                aLpO                     ;	
@@ -44,43 +44,43 @@ input   wire                nRstI                    ;
 
 m3_powerAndSpeedCalc 
 calc(
-    .m3startI        (   m3startI         ),
-    .m3freqINCi      (   m3freqINCi       ),
-    .m3freqDECi      (   m3freqDECi       ),
-    .m3powerINCi     (   m3powerINCi      ),
-    .m3powerDECi     (   m3powerDECi      ),
-    .m3forceStopI    (   m3forceStopI     ),
-    .m3invRotateI    (   m3invRotateI     ),
+		.m3startI        (   m3startI         ),
+		.m3freqINCi      (   m3freqINCi       ),
+		.m3freqDECi      (   m3freqDECi       ),
+		.m3powerINCi     (   m3powerINCi      ),
+		.m3powerDECi     (   m3powerDECi      ),
+		.m3forceStopI    (   m3forceStopI     ),
+		.m3invRotateI    (   m3invRotateI     ),
 
-    .clkI            ( clkI  ),
-    .nRstI           ( nRstI ) 
-);
+		.clkI            ( clkI  ),
+		.nRstI           ( nRstI ) 
+    );
 
 motor3_irs2007s_driver
 irsA(
-    .HinO            ( aHpO  ),
-    .nLinO           ( aLpO  ),
-    .clkI            ( clkI  ),
-    .nRstI           ( nRstI ),
-    .down1_up2i      ( 2'd0  )
-);
+		.HinO            ( aHpO  ),
+		.nLinO           ( aLpO  ),
+		.clkI            ( clkI  ),
+		.nRstI           ( nRstI ),
+		.down1_up2i      ( 2'd0  )
+    );
 motor3_irs2007s_driver
 irsB(
-    .HinO            ( bHpO  ),
-    .nLinO           ( bLpO  ),
-    .clkI            ( clkI  ),
-    .nRstI           ( nRstI ),
-    .down1_up2i      ( 2'd0  )
-);
+		.HinO            ( bHpO  ),
+		.nLinO           ( bLpO  ),
+		.clkI            ( clkI  ),
+		.nRstI           ( nRstI ),
+		.down1_up2i      ( 2'd0  )
+    );
 motor3_irs2007s_driver
 irsC(
-    .HinO            ( cHpO  ),
-    .nLinO           ( cLpO  ),
-    .clkI            ( clkI  ),
-    .nRstI           ( nRstI ),
-    .down1_up2i      ( 2'd0  )
-);
-                                                   
+		.HinO            ( cHpO  ),
+		.nLinO           ( cLpO  ),
+		.clkI            ( clkI  ),
+		.nRstI           ( nRstI ),
+		.down1_up2i      ( 2'd0  )
+    );
+
 
 
 endmodule

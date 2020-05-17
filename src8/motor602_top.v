@@ -1,24 +1,24 @@
 module motor602_top(
-    aHPo,
-    aLNo,
-    bHPo,
-    bLNo,
-    cHPo,
-    cLNo,
+		aHPo,
+		aLNo,
+		bHPo,
+		bLNo,
+		cHPo,
+		cLNo,
 
-    m3startI        ,
-    m3forceStopI    ,
-    m3invRotateI    ,
-    m3freqINCi      ,
-    m3freqDECi      ,
-    m3powerINCi      ,
-    m3powerDECi      ,
+		m3startI        ,
+		m3forceStopI    ,
+		m3invRotateI    ,
+		m3freqINCi      ,
+		m3freqDECi      ,
+		m3powerINCi      ,
+		m3powerDECi      ,
 
-    nRstI,
-    clkHIi,
-    clkI
+		nRstI,
+		clkHIi,
+		clkI
 
-);
+		);
 
 output  wire                aHPo ;	
 output  wire                aLNo ;	
@@ -42,19 +42,19 @@ input   wire                nRstI;
 reg   [6:0]                 regclked       ;	
 
 always @ (posedge clkI or negedge nRstI) begin
-    if(!nRstI) begin
-        regclked              <= 6'd0                ;
-    end
-    else begin
-        regclked       <= { 
-        m3startI             ,
-        m3forceStopI         ,
-        m3invRotateI         ,
-        m3freqINCi           ,
-        m3freqDECi           ,
-        m3powerINCi          ,
-        m3powerDECi          } ;
-    end
+if(!nRstI) begin
+regclked              <= 6'd0                ;
+end
+else begin
+regclked       <= { 
+	m3startI             ,
+	m3forceStopI         ,
+	m3invRotateI         ,
+	m3freqINCi           ,
+	m3freqDECi           ,
+	m3powerINCi          ,
+	m3powerDECi          } ;
+end
 end
 
 
@@ -62,23 +62,23 @@ end
 motor602_real
 r
 (
-    .aHpO                   ( aHPo                     ),
-    .aLpO                   ( aLNo                     ),
-    .bHpO                   ( bHPo                     ),
-    .bLpO                   ( bLNo                     ),
-    .cHpO                   ( cHPo                     ),
-    .cLpO                   ( cLNo                     ),
+ .aHpO                   ( aHPo                     ),
+ .aLpO                   ( aLNo                     ),
+ .bHpO                   ( bHPo                     ),
+ .bLpO                   ( bLNo                     ),
+ .cHpO                   ( cHPo                     ),
+ .cLpO                   ( cLNo                     ),
 
-    .m3startI               ( regclked[6]              ),
-    .m3forceStopI           ( regclked[5]              ),
-    .m3invRotateI           ( regclked[4]              ),
-    .m3freqINCi             ( regclked[3]              ),
-    .m3freqDECi             ( regclked[2]              ),
-    .m3powerINCi            ( regclked[1]              ),
-    .m3powerDECi            ( regclked[0]              ),
+ .m3startI               ( regclked[6]              ),
+ .m3forceStopI           ( regclked[5]              ),
+ .m3invRotateI           ( regclked[4]              ),
+ .m3freqINCi             ( regclked[3]              ),
+ .m3freqDECi             ( regclked[2]              ),
+ .m3powerINCi            ( regclked[1]              ),
+ .m3powerDECi            ( regclked[0]              ),
 
-    .nRstI                  (   nRstI                   ),
-    .clkI                   (   clkI                    )
-);
+ .nRstI                  (   nRstI                   ),
+ .clkI                   (   clkI                    )
+ );
 
 endmodule

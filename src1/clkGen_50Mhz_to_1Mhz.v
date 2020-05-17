@@ -1,9 +1,9 @@
 module clkGen_50Mhz_to_1Mhz(
-    clk1mhzO, // generated : 1Mhz
-    nRstI,
-    clk50mhzI
+		clk1mhzO, // generated : 1Mhz
+		nRstI,
+		clk50mhzI
 
-);
+		);
 
 output  reg                 clk1mhzO ;	
 input   wire                nRstI;		
@@ -19,19 +19,19 @@ input   wire                clk50mhzI;
 `define CLOCK_mBit      5
 reg     [5:0]               cnt ;	
 always @ (negedge clk50mhzI or negedge nRstI) begin
-    if(!nRstI) begin
-        cnt                 <= `CLOCK_max ;
-        clk1mhzO            <= 1'b0 ;
-    end
-    else begin
-        if ( 1'b1 == cnt[`CLOCK_mBit] ) begin
-            cnt             <= `CLOCK_max ;
-            clk1mhzO        <=  ~clk1mhzO ;
-        end 
-        else begin
-            cnt             <= cnt - `CLOCK_one ;
-        end
-    end
+if(!nRstI) begin
+cnt                 <= `CLOCK_max ;
+clk1mhzO            <= 1'b0 ;
+end
+else begin
+if ( 1'b1 == cnt[`CLOCK_mBit] ) begin
+cnt             <= `CLOCK_max ;
+clk1mhzO        <=  ~clk1mhzO ;
+end 
+else begin
+cnt             <= cnt - `CLOCK_one ;
+end
+end
 end
 
 endmodule

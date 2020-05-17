@@ -2,7 +2,7 @@
 `timescale 10ns / 1ns
 
 module motor602_tb(
-);
+		);
 
 wire                        aHPw ;	
 wire                        aLNw ;	
@@ -28,89 +28,89 @@ reg                         nRstR;		// reset button on the core board
 
 motor602_rtl_top
 rtlTop(
-    .aHPo            (   aHPw             ),
-    .aLNo            (   aLNw             ),
-    .bHPo            (   bHPw             ),
-    .bLNo            (   bLNw             ),
-    .cHPo            (   cHPw             ),
-    .cLNo            (   cLNw             ),
-                                       
-    .m3startI        (   m3startR        ),
-    .m3freqINCi      (   m3freqINCr      ),
-    .m3freqDECi      (   m3freqDECr      ),
-    .m3powerINCi     (   m3powerINCr      ),
-    .m3powerDECi     (   m3powerDECr      ),
-    .m3forceStopI    (   m3forceStopR    ),
-    .m3invRotateI    (   m3invRotateR    ),
+		.aHPo            (   aHPw             ),
+		.aLNo            (   aLNw             ),
+		.bHPo            (   bHPw             ),
+		.bLNo            (   bLNw             ),
+		.cHPo            (   cHPw             ),
+		.cLNo            (   cLNw             ),
 
-    .tp01o           (   tp01w           ),
-    .tp02o           (   tp02w           ),
-    .uTxO            (   uTxW            ),
-                   
-    .led4O           (   led4W           ),
-                   
-    .nRstI           (   nRstR            ),
-    .clk50mhzI       (   clkR             )
-);
+		.m3startI        (   m3startR        ),
+		.m3freqINCi      (   m3freqINCr      ),
+		.m3freqDECi      (   m3freqDECr      ),
+		.m3powerINCi     (   m3powerINCr      ),
+		.m3powerDECi     (   m3powerDECr      ),
+		.m3forceStopI    (   m3forceStopR    ),
+		.m3invRotateI    (   m3invRotateR    ),
 
-initial begin
-    $fsdbDumpfile("verdi.fsdb") ;
-    $fsdbDumpvars(0,motor602_tb) ;
-end
+		.tp01o           (   tp01w           ),
+		.tp02o           (   tp02w           ),
+		.uTxO            (   uTxW            ),
 
-initial
-begin
+		.led4O           (   led4W           ),
 
-//    $dumpfile("Counter.vcd");
-//    $dumpvars(0, Counter_tb);
+		.nRstI           (   nRstR            ),
+		.clk50mhzI       (   clkR             )
+	);
 
-    #1
-    clkR = 0;
-    nRstR = 1;
+	initial begin
+	$fsdbDumpfile("verdi.fsdb") ;
+	$fsdbDumpvars(0,motor602_tb) ;
+	end
 
-    #1
-    nRstR = 0;
+	initial
+	begin
 
-    m3startR = 0;	
-    m3forceStopR = 0 ;	 
-    m3invRotateR = 0 ;	 
-    m3freqINCr   = 0 ;
-    m3freqDECr   = 0 ;
-    m3powerINCr   = 0 ;
-    m3powerDECr   = 0 ;
+	//    $dumpfile("Counter.vcd");
+	//    $dumpvars(0, Counter_tb);
 
-    #1
-    nRstR = 1;
+#1
+	clkR = 0;
+	nRstR = 1;
 
-    #10
-    m3startR = 1;	
+#1
+	nRstR = 0;
 
-    #1_200_000      // 12ms
-    #1_200_000      // 12ms
-//    #7_200_000      // 12ms
-    #9_600_000      // 12ms
-`ifdef simulating
-    #20_000_000       // 200ms
-`endif
-    //#10_000_000     // 100ms
-    //#100_000_000    // 1s
-    $finish;
-end
+	m3startR = 0;	
+	m3forceStopR = 0 ;	 
+	m3invRotateR = 0 ;	 
+	m3freqINCr   = 0 ;
+	m3freqDECr   = 0 ;
+	m3powerINCr   = 0 ;
+	m3powerDECr   = 0 ;
 
-always begin
-    #1 clkR = !clkR ;
-end
+#1
+	nRstR = 1;
 
-assign error01  = ({aHPw,bHPw,cHPw}==3'b000) ;
-assign error11  = ({aLNw,bLNw,cLNw}==3'b100) ;
-assign error12  = ({aLNw,bLNw,cLNw}==3'b010) ;
-assign error13  = ({aLNw,bLNw,cLNw}==3'b001) ;
-assign error14  = ({aLNw,bLNw,cLNw}==3'b000) ;
-assign error19  = error11 | error12 | error13 | error14 ;
-assign error91  = error01 & error19 ;
-//assign error92  = (rtlTop.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
-assign error92  = 1'b0;
+#10
+	m3startR = 1;	
+
+#1_200_000      // 12ms
+#1_200_000      // 12ms
+	//    #7_200_000      // 12ms
+#9_600_000      // 12ms
+	`ifdef simulating
+#20_000_000       // 200ms
+	`endif
+	//#10_000_000     // 100ms
+	//#100_000_000    // 1s
+	$finish;
+	end
+
+	always begin
+#1 clkR = !clkR ;
+	end
+
+	assign error01  = ({aHPw,bHPw,cHPw}==3'b000) ;
+	assign error11  = ({aLNw,bLNw,cLNw}==3'b100) ;
+	assign error12  = ({aLNw,bLNw,cLNw}==3'b010) ;
+	assign error13  = ({aLNw,bLNw,cLNw}==3'b001) ;
+	assign error14  = ({aLNw,bLNw,cLNw}==3'b000) ;
+	assign error19  = error11 | error12 | error13 | error14 ;
+	assign error91  = error01 & error19 ;
+	//assign error92  = (rtlTop.m3t.r.lgA.pwmSG.unknowN1)? 1'b1:1'b0 ;
+	assign error92  = 1'b0;
 
 
 
-endmodule
+	endmodule
