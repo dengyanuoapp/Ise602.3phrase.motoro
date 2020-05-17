@@ -41,7 +41,28 @@ module m3_powerAndSpeedCalc (
     `define   clkPeriodMin      22'd40
 
     reg          [3:0]          step        ;
+    reg          [21:0]         remain      ;
+    wire                        nextStep    = (remain == 22'd1);
 
+
+    always @( posedge clkI or negedge nRstI ) begin
+        if ( ! nRstI ) begin
+            remain            <= `clkPeriodMax          ;
+        end
+        else begin
+            if ( m3startI == 1'b0 ) begin
+                remain        <= `clkPeriodMax          ;
+            end
+            else begin
+                if ( nextStep == 1'b1 ) begin
+                    remain    <= `clkPeriodMax          ;
+                end
+                else begin
+                    remain    <= remain    - 22'd1     ;
+                end
+            end
+        end
+    end
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
@@ -53,11 +74,13 @@ module m3_powerAndSpeedCalc (
                 step        <= 4'hF                  ;
             end
             else begin
-                if ( step == 4'd11 ) begin
-                    step    <= 4'd0              ;
-                end
-                else begin
-                    step    <= step    + 4'd1    ;
+                if ( nextStep == 1'b1 ) begin
+                    if ( step == 4'd11 ) begin
+                        step    <= 4'd0              ;
+                    end
+                    else begin
+                        step    <= step    + 4'd1    ;
+                    end
                 end
             end
         end
