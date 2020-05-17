@@ -2,24 +2,24 @@ module m3_powerAndSpeedCalc (
     m3startI                        ,
     m3forceStopI                    ,
     m3invRotateI                    ,
-    m3freqINCi			    ,
-    m3freqDECi			    ,
-    m3powerINCi			    ,
-    m3powerDECi			    ,
+    m3freqINCi                      ,
+    m3freqDECi                      ,
+    m3powerINCi                     ,
+    m3powerDECi                     ,
 
     clkI                            ,
     nRstI
 );
-    input   wire                m3startI    ;
-    input   wire                m3forceStopI;
-    input   wire                m3invRotateI;
-    input   wire                m3freqINCi	;
-    input   wire                m3freqDECi	;
-    input   wire                m3powerINCi	;
-    input   wire                m3powerDECi	;
+    input   wire                m3startI        ;
+    input   wire                m3forceStopI    ;
+    input   wire                m3invRotateI    ;
+    input   wire                m3freqINCi      ;
+    input   wire                m3freqDECi      ;
+    input   wire                m3powerINCi     ;
+    input   wire                m3powerDECi     ;
 
-    input wire                  clkI        ;
-    input wire                  nRstI       ;
+    input wire                  clkI            ;
+    input wire                  nRstI           ;
 
     /*
     *
@@ -45,7 +45,39 @@ module m3_powerAndSpeedCalc (
     reg          [3:0]          step        ;
     reg          [21:0]         remain      ;
     wire                        nextStep    = (remain == 22'd1);
+    reg          [3:0]          sm          ;
+    reg          [3:0]          sm_next     ;
 
+    parameter    SM_101_powerCalc_init      = 4'd0     ;
+    parameter    SM_101_powerCalc_load_1    = 4'd1     ;
+    parameter    SM_101_powerCalc_end       = 4'hF     ;
+
+    always @( * ) begin
+        sm_next             = sm                        ;
+        case ( sm ) 
+            SM_101_powerCalc_init :
+                sm_next     = SM_101_powerCalc_load_1   ;
+            SM_101_powerCalc_load_1 :
+                sm_next     = SM_101_powerCalc_end      ;
+        endcase
+        if ( nextStep == 1'b1 && step == 4'd10 ) begin
+            sm_next         = SM_101_powerCalc_init     ;
+        end
+    end
+
+    always @( posedge clkI or negedge nRstI ) begin
+        if ( ! nRstI ) begin
+            sm                <= SM_101_powerCalc_init          ;
+        end
+        else begin
+            if ( m3startI == 1'b0 ) begin
+                sm            <= SM_101_powerCalc_init          ;
+            end
+            else begin
+                sm            <= sm_next                        ;
+            end
+        end
+    end
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
