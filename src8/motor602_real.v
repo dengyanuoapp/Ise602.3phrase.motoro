@@ -42,6 +42,20 @@ input   wire                m3powerDECi              ;
 input   wire                clkI                     ;			// 1MHz
 input   wire                nRstI                    ;		
 
+m3_powerAndSpeedCalc 
+calc(
+    .m3startI        (   m3startI         ),
+    .m3freqINCi      (   m3freqINCi       ),
+    .m3freqDECi      (   m3freqDECi       ),
+    .m3powerINCi     (   m3powerINCi      ),
+    .m3powerDECi     (   m3powerDECi      ),
+    .m3forceStopI    (   m3forceStopI     ),
+    .m3invRotateI    (   m3invRotateI     ),
+
+    .clkI            ( clkI  ),
+    .nRstI           ( nRstI ),
+);
+
 motor3_irs2007s_driver
 irsA(
     .HinO            ( aHpO  ),
