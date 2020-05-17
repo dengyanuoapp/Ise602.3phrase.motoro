@@ -38,7 +38,9 @@ module m3_powerAndSpeedCalc (
     `else
         `define   clkPeriodMax      22'd4000000
     `endif
-    `define   clkPeriodMin      22'd40
+    `define   clkPeriodMin          22'd40
+    `define   powerMax              10'd1023
+    `define   powerInit             10'd102
 
     reg          [3:0]          step        ;
     reg          [21:0]         remain      ;
