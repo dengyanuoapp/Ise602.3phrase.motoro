@@ -53,7 +53,7 @@ calc(
     .m3invRotateI    (   m3invRotateI     ),
 
     .clkI            ( clkI  ),
-    .nRstI           ( nRstI ),
+    .nRstI           ( nRstI ) 
 );
 
 motor3_irs2007s_driver
