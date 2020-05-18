@@ -41,6 +41,13 @@ module m3_powerAndSpeedCalc (
     `define   clkPeriodMin          22'd40
     `define   powerMax              10'd1023
     `define   powerInit             10'd102
+    /*
+    * Total Stotal    == (1.0 * powerLevel ) * len
+    * up :   SAup     == ((0.5773502692 + 1) / 2 * powerLevel) * len == 0.7886751346 * Stotal
+    *       Sup(xx_)  =  (0.5773502692 + ((( nowStepEndEdge / len ) * ( 1 - 0.5773502692)) / 2)) * Stotal
+    * down : SAdown   == ((1 + 0.8660254038) / 2 * powerLevel) * len == 0.9330127019 * Stotal
+    *     Sdown(xx_)  =  (1 - ( nowStepEndEdge / len ) * ( 1 - 0.8660254038) ) / 2 * Stotal
+    */
 
     reg          [3:0]          step        ;
     reg          [21:0]         remain      ;

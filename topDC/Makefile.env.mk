@@ -6,7 +6,7 @@ topClk:=clk50mhzI
 
 DEV01:=xc3s500e-pq208-4
 
-CFGmakeRun:=Makefile.run.synopsysDC
+CFGmakeRun:=Makefile.run.synopsysDC.mk
 
 #ttUCF:=ip2uart_top.ucf
 
