@@ -76,6 +76,9 @@ wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/remain}}
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/nextStep}}
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/sm}}
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/sm_next}}
+wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_full}}
+wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_up}}
+wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_down}}
 
 wvSelectAll
 wvSetRadix 		-win $$_nWave2 	-format UDec

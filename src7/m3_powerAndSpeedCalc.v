@@ -39,8 +39,8 @@ module m3_powerAndSpeedCalc (
         `define   clkPeriodMax      22'd4000000
     `endif
     `define   clkPeriodMin          22'd40
-    `define   powerMax              10'd1023
-    `define   powerInit             10'd102
+    `define   powerMax              10'd1000
+    `define   powerInit             10'd100
     /*
     * Total Stotal    == (1.0 * powerLevel ) * len
     * up :   SAup     == ((0.5773502692 + 1) / 2 * powerLevel) * len == 0.7886751346 * Stotal
@@ -126,5 +126,28 @@ module m3_powerAndSpeedCalc (
             end
         end
     end
+
+    `ifdef    simulating
+        reg          [31:0]          Sum_full           ;
+        reg          [31:0]          Sum_up             ;
+        reg          [31:0]          Sum_down           ;
+        always @( posedge clkI or negedge nRstI ) begin
+            if ( ! nRstI ) begin
+                Sum_full            <= 4'h0             ;
+            end
+            else begin
+                if ( m3startI == 1'b0 ) begin
+                    Sum_full        <= 31'h0            ;
+                    Sum_up          <= 31'h0            ;
+                    Sum_down        <= 31'h0            ;
+                end
+                else begin
+                    if ( (0 == Sum_full) || (1 == remain) ) begin
+                        Sum_full    <= Sum_full * `powerMax             ;
+                    end
+                end
+            end
+        end
+    `endif
 
 endmodule
