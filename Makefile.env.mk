@@ -1,7 +1,7 @@
 topModule:=motoro301_rtl_top
 DEV01:=xc3s500e-pq208-4
 
-CFGmakeRun:=Makefile.run.ise01
+CFGmakeRun:=Makefile.run.ise01.mk
 
 #ttUCF:=ip2uart_top.ucf
 
