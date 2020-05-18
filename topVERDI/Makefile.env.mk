@@ -1,7 +1,7 @@
 topModule:=motor602_tb
 DEV01:=xc3s500e-pq208-4
 
-CFGmakeRun:=Makefile.run.synopsysVERDI
+CFGmakeRun:=Makefile.run.synopsysVERDI.mk
 
 VERDItb:=motor602_tb
 VERDIrtlTop:=$(VERDItb)/rtlTop
