@@ -9,8 +9,8 @@ module motor602_real(
     m3startI        ,
     m3forceStopI    ,
     m3invRotateI    ,
-    m3freqINCi      ,
-    m3freqDECi      ,
+    m3speedDECi      ,
+    m3speedINCi      ,
     m3powerINCi     ,
     m3powerDECi     ,
 
@@ -34,8 +34,8 @@ module motor602_real(
     input   wire                m3invRotateI             ;	 
 
     // freq 1 - 1000, ==> 60 - 60,000 rpm(round per minutes)
-    input   wire                m3freqINCi               ;	 
-    input   wire                m3freqDECi               ;	 
+    input   wire                m3speedDECi               ;	 
+    input   wire                m3speedINCi               ;	 
     input   wire                m3powerINCi              ;	 
     input   wire                m3powerDECi              ;	 
 
@@ -45,8 +45,8 @@ module motor602_real(
     m3_powerAndSpeedCalc 
     calc(
         .m3startI        (   m3startI         ),
-        .m3freqINCi      (   m3freqINCi       ),
-        .m3freqDECi      (   m3freqDECi       ),
+        .m3speedDECi      (   m3speedDECi       ),
+        .m3speedINCi      (   m3speedINCi       ),
         .m3powerINCi     (   m3powerINCi      ),
         .m3powerDECi     (   m3powerDECi      ),
         .m3forceStopI    (   m3forceStopI     ),

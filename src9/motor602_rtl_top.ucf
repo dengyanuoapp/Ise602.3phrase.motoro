@@ -20,8 +20,8 @@ NET "uTx"       LOC = "P123" ;
 # NET "m3freq[2]"     LOC = "P133" ;
 # NET "m3freq[1]"     LOC = "P129" ;
 # NET "m3freq[0]"     LOC = "P127" ;
-NET "m3freqINC"     LOC = "P153" ;
-NET "m3freqDEC"     LOC = "P151" ;
+NET "m3speedDEC"     LOC = "P153" ;
+NET "m3speedINC"     LOC = "P151" ;
 
 NET "m3start"       LOC = "P160" ;
 NET "m3forceStop"   LOC = "P152" ;

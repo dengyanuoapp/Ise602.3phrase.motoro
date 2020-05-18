@@ -9,8 +9,8 @@ module motor602_top(
     m3startI        ,
     m3forceStopI    ,
     m3invRotateI    ,
-    m3freqINCi      ,
-    m3freqDECi      ,
+    m3speedDECi      ,
+    m3speedINCi      ,
     m3powerINCi      ,
     m3powerDECi      ,
 
@@ -30,8 +30,8 @@ module motor602_top(
     input   wire                m3startI;	
     input   wire                m3forceStopI;	 
     input   wire                m3invRotateI;	 
-    input   wire                m3freqINCi	;
-    input   wire                m3freqDECi	;
+    input   wire                m3speedDECi	;
+    input   wire                m3speedINCi	;
     input   wire                m3powerINCi	;
     input   wire                m3powerDECi	;
 
@@ -50,8 +50,8 @@ module motor602_top(
                 m3startI             ,
                 m3forceStopI         ,
                 m3invRotateI         ,
-                m3freqINCi           ,
-                m3freqDECi           ,
+                m3speedDECi           ,
+                m3speedINCi           ,
                 m3powerINCi          ,
                 m3powerDECi          } ;
         end
@@ -72,8 +72,8 @@ module motor602_top(
         .m3startI               ( regclked[6]              ),
         .m3forceStopI           ( regclked[5]              ),
         .m3invRotateI           ( regclked[4]              ),
-        .m3freqINCi             ( regclked[3]              ),
-        .m3freqDECi             ( regclked[2]              ),
+        .m3speedDECi             ( regclked[3]              ),
+        .m3speedINCi             ( regclked[2]              ),
         .m3powerINCi            ( regclked[1]              ),
         .m3powerDECi            ( regclked[0]              ),
 

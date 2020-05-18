@@ -11,8 +11,8 @@ module motor602_rtl_top(
     m3startI         ,
     m3forceStopI     ,
     m3invRotateI     ,
-    m3freqINCi       ,
-    m3freqDECi       ,
+    m3speedDECi       ,
+    m3speedINCi       ,
     m3powerINCi       ,
     m3powerDECi       ,
 
@@ -35,8 +35,8 @@ module motor602_rtl_top(
     input   wire                m3startI;	
     input   wire                m3forceStopI;	 
     input   wire                m3invRotateI;	 
-    input   wire                m3freqINCi;	 
-    input   wire                m3freqDECi;	 
+    input   wire                m3speedDECi;	 
+    input   wire                m3speedINCi;	 
     input   wire                m3powerINCi;	 
     input   wire                m3powerDECi;	 
 
@@ -77,8 +77,8 @@ module motor602_rtl_top(
         .cLNo            (   cLNo             ),
 
         .m3startI        (   m3startI         ),
-        .m3freqINCi      (   m3freqINCi       ),
-        .m3freqDECi      (   m3freqDECi       ),
+        .m3speedDECi      (   m3speedDECi       ),
+        .m3speedINCi      (   m3speedINCi       ),
         .m3powerINCi     (   m3powerINCi      ),
         .m3powerDECi     (   m3powerDECi      ),
         .m3forceStopI    (   m3forceStopI     ),

@@ -2,8 +2,8 @@ module m3_powerAndSpeedCalc (
     m3startI                        ,
     m3forceStopI                    ,
     m3invRotateI                    ,
-    m3freqINCi                      ,
-    m3freqDECi                      ,
+    m3speedDECi                      ,
+    m3speedINCi                      ,
     m3powerINCi                     ,
     m3powerDECi                     ,
 
@@ -13,8 +13,8 @@ module m3_powerAndSpeedCalc (
     input   wire                m3startI        ;
     input   wire                m3forceStopI    ;
     input   wire                m3invRotateI    ;
-    input   wire                m3freqINCi      ;
-    input   wire                m3freqDECi      ;
+    input   wire                m3speedDECi      ;
+    input   wire                m3speedINCi      ;
     input   wire                m3powerINCi     ;
     input   wire                m3powerDECi     ;
 
@@ -41,6 +41,7 @@ module m3_powerAndSpeedCalc (
     `define   clkPeriodMin          22'd40
     `define   powerMax              10'd1000
     `define   powerInit             10'd100
+    `define   roundMax              4'd3
     /*
     * Total Stotal    == (1.0 * powerLevel ) * len
     * up :   SAup     == ((0.5773502692 + 1) / 2 * powerLevel) * len == 0.7886751346 * Stotal
@@ -57,6 +58,9 @@ module m3_powerAndSpeedCalc (
         (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
     reg          [3:0]          sm          ;
     reg          [3:0]          sm_next     ;
+    reg          [31:0]         roundLen    ;
+    reg                         roundLast   ;
+    reg          [3:0]          roundCnt    ;
 
     parameter    SM_101_powerCalc_init      = 4'd0     ;
     parameter    SM_101_powerCalc_load_1    = 4'd1     ;
@@ -77,32 +81,92 @@ module m3_powerAndSpeedCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            sm                <= SM_101_powerCalc_init          ;
+            sm                  <= SM_101_powerCalc_init          ;
         end
         else begin
             if ( m3startI == 1'b0 ) begin
-                sm            <= SM_101_powerCalc_init          ;
+                sm              <= SM_101_powerCalc_init          ;
             end
             else begin
-                sm            <= sm_next                        ;
+                sm              <= sm_next                        ;
             end
         end
     end
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            remain            <= `clkPeriodMax          ;
+            roundLen                                <= `clkPeriodMax        ;
+            roundCnt                                <= `roundMax            ;
+            roundLast                               <= 1'b0                 ;
+        end
+        else begin
+            if ( m3startI == 1'b0 || step == 4'd15 ) begin
+                roundLen                            <= `clkPeriodMax        ;
+                roundCnt                            <= `roundMax            ;
+                roundLast                           <= 1'b0                 ;
+            end
+            else begin
+                if ( nextRound == 1'b1 ) begin
+                    if ( m3speedDECi == 1'b1 ) begin
+                        if ( roundLast == 1'b0 ) begin // ok , it is INCing
+                            if ( roundCnt == 4'd0 ) begin // 1/16 --> inc freq 6.25%
+                                roundCnt            <= `roundMax            ;
+                                roundLen            <= roundLen - roundLen[31:4] ;
+                                if ( roundLen < `clkPeriodMin ) begin // reach max freq(min period)
+                                    roundLen        <= `clkPeriodMin        ;
+                                end
+                            end
+                            else begin
+                                roundCnt            <= roundCnt - 4'd1      ;
+                            end
+                        end
+                        else begin // transmit from DECing to INCing. reset counter.
+                            roundCnt                <= `roundMax            ; 
+                            roundLast               <= 1'b0                 ;
+                        end
+                    end 
+                    else begin
+                        if ( m3speedINCi == 1'b1 ) begin
+                            if ( roundLast == 1'b1 ) begin // ok , it is DECing
+                                if ( roundCnt == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
+                                    roundCnt        <= `roundMax            ;
+                                    roundLen        <= roundLen + roundLen[31:4] ; 
+                                    if ( roundLen > `clkPeriodMax ) begin // reach min freq(max period)
+                                        roundLen    <= `clkPeriodMax        ;
+                                    end
+                                end
+                                else begin
+                                    roundCnt        <= roundCnt - 4'd1      ;
+                                end
+                            end
+                            else begin // transmit from INCing to DECing . reset counter.
+                                roundCnt            <= `roundMax            ; 
+                                roundLast           <= 1'b1                 ; 
+                            end
+                        end 
+                        else begin // not INCing , not DECing. reset counter.
+                            roundCnt                <= `roundMax            ; 
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    always @( posedge clkI or negedge nRstI ) begin
+        if ( ! nRstI ) begin
+            remain            <= roundLen               ;
         end
         else begin
             if ( m3startI == 1'b0 ) begin
-                remain        <= `clkPeriodMax          ;
+                remain        <= roundLen               ;
             end
             else begin
                 if ( nextStep == 1'b1 ) begin
-                    remain    <= `clkPeriodMax          ;
+                    remain    <= roundLen               ;
                 end
                 else begin
-                    remain    <= remain    - 22'd1     ;
+                    remain    <= remain    - 22'd1  ;
                 end
             end
         end
@@ -110,20 +174,19 @@ module m3_powerAndSpeedCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            //step        <= 4'd0                  ;
-            step            <= 4'hF                  ;
+            step                <= 4'hF                 ;
         end
         else begin
             if ( m3startI == 1'b0 ) begin
-                step        <= 4'hF                  ;
+                step            <= 4'hF                 ;
             end
             else begin
                 if ( nextStep == 1'b1 ) begin
                     if ( step == 4'd11 ) begin
-                        step    <= 4'd0              ;
+                        step    <= 4'd0                 ;
                     end
                     else begin
-                        step    <= step    + 4'd1    ;
+                        step    <= step    + 4'd1       ;
                     end
                 end
             end

@@ -13,8 +13,8 @@ module motor602_tb(
     reg                         m3startR;	
     reg                         m3forceStopR;	 
     reg                         m3invRotateR;	 
-    reg                         m3freqINCr;	 
-    reg                         m3freqDECr;	 
+    reg                         m3speedDECr;	 
+    reg                         m3speedINCr;	 
     reg                         m3powerINCr;	 
     reg                         m3powerDECr;	 
 
@@ -36,8 +36,8 @@ module motor602_tb(
         .cLNo            (   cLNw             ),
 
         .m3startI        (   m3startR        ),
-        .m3freqINCi      (   m3freqINCr      ),
-        .m3freqDECi      (   m3freqDECr      ),
+        .m3speedDECi      (   m3speedDECr      ),
+        .m3speedINCi      (   m3speedINCr      ),
         .m3powerINCi     (   m3powerINCr      ),
         .m3powerDECi     (   m3powerDECr      ),
         .m3forceStopI    (   m3forceStopR    ),
@@ -98,16 +98,18 @@ module motor602_tb(
 
     initial begin
         #1
-        m3freqINCr   = 0 ;
-        m3freqDECr   = 0 ;
+        m3speedDECr   = 0 ;
+        m3speedINCr   = 0 ;
+
         #10
-        m3freqINCr   = 1 ;
+        m3speedINCr   = 1 ;
         #15000000
-        m3freqINCr   = 0 ;
+        m3speedINCr   = 0 ;
+
         #10
-        m3freqDECr   = 1 ;
+        m3speedDECr   = 1 ;
         #15000000
-        m3freqDECr   = 0 ;
+        m3speedDECr   = 0 ;
     end
 
     always begin
