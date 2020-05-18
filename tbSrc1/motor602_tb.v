@@ -75,8 +75,6 @@ module motor602_tb(
         m3startR = 0;	
         m3forceStopR = 0 ;	 
         m3invRotateR = 0 ;	 
-        m3freqINCr   = 0 ;
-        m3freqDECr   = 0 ;
         m3powerINCr   = 0 ;
         m3powerDECr   = 0 ;
 
@@ -96,6 +94,20 @@ module motor602_tb(
         //#10_000_000     // 100ms
         //#100_000_000    // 1s
         $finish;
+    end
+
+    initial begin
+        #1
+        m3freqINCr   = 0 ;
+        m3freqDECr   = 0 ;
+        #10
+        m3freqINCr   = 1 ;
+        #15000000
+        m3freqINCr   = 0 ;
+        #10
+        m3freqDECr   = 1 ;
+        #15000000
+        m3freqDECr   = 0 ;
     end
 
     always begin

@@ -51,7 +51,10 @@ module m3_powerAndSpeedCalc (
 
     reg          [3:0]          step        ;
     reg          [21:0]         remain      ;
+    reg          [21:0]         remain_next ;
     wire                        nextStep    = (remain == 22'd1);
+    wire                        nextRound   = 
+        (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
     reg          [3:0]          sm          ;
     reg          [3:0]          sm_next     ;
 
@@ -143,7 +146,7 @@ module m3_powerAndSpeedCalc (
                 end
                 else begin
                     if ( (0 == Sum_full) || (1 == remain) ) begin
-                        Sum_full    <= Sum_full * `powerMax             ;
+                        Sum_full    <= `clkPeriodMax * `powerMax             ;
                     end
                 end
             end
