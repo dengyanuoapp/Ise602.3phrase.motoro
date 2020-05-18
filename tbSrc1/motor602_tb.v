@@ -89,7 +89,7 @@ module motor602_tb(
         //    #7_200_000      // 12ms
         #9_600_000      // 12ms
         `ifdef simulating
-            #20_000_000       // 200ms
+            #40_000_000       // 200ms
         `endif
         //#10_000_000     // 100ms
         //#100_000_000    // 1s
@@ -103,12 +103,12 @@ module motor602_tb(
 
         #10
         m3speedINCr   = 1 ;
-        #15000000
+        #23000000
         m3speedINCr   = 0 ;
 
         #10
         m3speedDECr   = 1 ;
-        #15000000
+        #23000000
         m3speedDECr   = 0 ;
     end
 

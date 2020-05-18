@@ -34,7 +34,10 @@ module m3_powerAndSpeedCalc (
     */
     `ifdef    simulating
         //    +define+simulating , to reduce the VCS debug time.
-        `define   clkPeriodMax      22'd400
+        //`define   clkPeriodMax      22'd400
+        `define   clkPeriodMax      22'd300
+        //`define   clkPeriodMax      22'd200
+        //`define   clkPeriodMax      22'd100
     `else
         `define   clkPeriodMax      22'd4000000
     `endif
@@ -107,12 +110,14 @@ module m3_powerAndSpeedCalc (
             end
             else begin
                 if ( nextRound == 1'b1 ) begin
-                    if ( m3speedDECi == 1'b1 ) begin
+                    if ( m3speedINCi == 1'b1 ) begin
                         if ( roundLast == 1'b0 ) begin // ok , it is INCing
                             if ( roundCnt == 4'd0 ) begin // 1/16 --> inc freq 6.25%
                                 roundCnt            <= `roundMax            ;
-                                roundLen            <= roundLen - roundLen[31:4] ;
-                                if ( roundLen < `clkPeriodMin ) begin // reach max freq(min period)
+                                if ( roundLen - roundLen[31:4] > `clkPeriodMin ) begin // reach max freq(min period)
+                                    roundLen        <= roundLen - roundLen[31:4] ;
+                                end
+                                else begin
                                     roundLen        <= `clkPeriodMin        ;
                                 end
                             end
@@ -126,13 +131,15 @@ module m3_powerAndSpeedCalc (
                         end
                     end 
                     else begin
-                        if ( m3speedINCi == 1'b1 ) begin
+                        if ( m3speedDECi == 1'b1 ) begin
                             if ( roundLast == 1'b1 ) begin // ok , it is DECing
                                 if ( roundCnt == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
                                     roundCnt        <= `roundMax            ;
-                                    roundLen        <= roundLen + roundLen[31:4] ; 
-                                    if ( roundLen > `clkPeriodMax ) begin // reach min freq(max period)
+                                    if ( roundLen + roundLen[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
                                         roundLen    <= `clkPeriodMax        ;
+                                    end
+                                    else begin
+                                        roundLen    <= roundLen + roundLen[31:4] ; 
                                     end
                                 end
                                 else begin
