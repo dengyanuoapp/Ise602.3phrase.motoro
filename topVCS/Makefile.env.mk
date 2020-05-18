@@ -1,7 +1,7 @@
 topModule:=motoro301_tb
 DEV01:=xc3s500e-pq208-4
 
-CFGmakeRun:=Makefile.run.synopsysVCS
+CFGmakeRun:=Makefile.run.synopsysVCS.mk
 
 #ttUCF:=ip2uart_top.ucf
 
