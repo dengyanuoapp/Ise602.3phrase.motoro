@@ -100,7 +100,7 @@ wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3invRotateI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3forceStopI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedDECi }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedINCi }}
-wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clk100hzO   }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clk100hzI   }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clkI        }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/nRstI       }}
 
@@ -116,9 +116,11 @@ wvCollapseGroup	MrPortAll
 wvCollapseGroup	TbMrMosCmp
 wvCollapseGroup	TbError9
 wvCollapseGroup	rCalc1
+wvCollapseGroup	calcDebug
 #wvCollapseGroup	rCalc2
 #wvCollapseGroup	spCalc
 
+wvResizeWindow -win $_nWave2 20 28 1500 800
 
 endef
 

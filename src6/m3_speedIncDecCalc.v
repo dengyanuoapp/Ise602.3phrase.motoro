@@ -6,7 +6,7 @@ module m3_speedIncDecCalc (
     m3speedDECi                     ,
     m3speedINCi                     ,
 
-    clk100hzO                       ,
+    clk100hzI                       ,
     clkI                            ,
     nRstI
 );
@@ -17,7 +17,7 @@ module m3_speedIncDecCalc (
     input   wire                m3speedDECi     ;
     input   wire                m3speedINCi     ;
 
-    output  wire                clk100hzO       ;
+    input   wire                clk100hzI       ;
     input   wire                clkI            ;
     input   wire                nRstI           ;
 
@@ -37,34 +37,6 @@ module m3_speedIncDecCalc (
     reg          [31:0]         roundLen                ;
     reg                         roundLast               ;
     reg          [3:0]          roundCnt1round          ;
-
-    `ifdef  simulating
-        `define      clk100hzMax    14'd9998
-    `else
-        //`define      clk100hzMax    14'd98
-        `define      clk100hzMax    14'd9998
-    `endif
-    reg          [14:0]         clk100hzCNT ;
-
-    assign clk100hzO    = clk100hzCNT[14] ;
-    always @( posedge clkI or negedge nRstI ) begin
-        if ( ! nRstI ) begin
-            clk100hzCNT         <= `clk100hzMax         ;
-        end
-        else begin
-            if ( workingI == 1'b0 ) begin
-                clk100hzCNT     <= `clk100hzMax         ;
-            end
-            else begin
-                if ( clk100hzO ) begin
-                    clk100hzCNT <= `clk100hzMax         ;
-                end
-                else begin
-                    clk100hzCNT <= clk100hzCNT - 15'd1  ;
-                end
-            end
-        end
-    end
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin

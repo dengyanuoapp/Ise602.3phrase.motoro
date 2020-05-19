@@ -41,12 +41,12 @@ module m3_powerAndSpeedCalc (
     .m3forceStopI       ( m3forceStopI  ),
     .m3speedDECi        ( m3speedDECi   ),
     .m3speedINCi        ( m3speedINCi   ),
-    .clk100hzO          ( clk100hzO     ),
+    .clk100hzI          ( clk100hzO     ),
     .clkI               ( clkI          ),
     .nRstI              ( nRstI         )
     );
 
-    m3_roundCalc
+    m3_stepCalc
     rCalc(
         .m3startI       ( m3startI           ),
         .m3forceStopI   ( m3forceStopI       ),
@@ -55,7 +55,7 @@ module m3_powerAndSpeedCalc (
         .m3speedINCi    ( m3speedINCi        ),
         .m3powerINCi    ( m3powerINCi        ),
         .m3powerDECi    ( m3powerDECi        ),
-        .clk100hzO      ( clk100hzO          ),
+        .workingO       ( workingW           ),
         .clkI           ( clkI               ),
         .nRstI          ( nRstI              )
     );
