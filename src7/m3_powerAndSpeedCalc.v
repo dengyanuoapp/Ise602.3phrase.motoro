@@ -77,6 +77,10 @@ module m3_powerAndSpeedCalc (
         .nRstI          ( nRstI         )
     );
 
+    m3_speedIncDecCalc
+    spCalc(
+    );
+
     parameter    SM_101_powerCalc_init      = 4'd0      ;
     parameter    SM_101_powerCalc_load_1    = 4'd1      ;
     parameter    SM_101_powerCalc_end       = 4'hF      ;

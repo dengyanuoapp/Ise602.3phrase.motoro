@@ -1,4 +1,4 @@
-module m3_peedIncDecCalc (
+module m3_speedIncDecCalc (
     nextRoundI                      ,
     workingI                        ,
     m3invRotateI                    ,

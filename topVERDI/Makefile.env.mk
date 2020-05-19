@@ -73,7 +73,7 @@ wvAddSignal 	-win $$_nWave2 	-group 	{MrPortAll {/$(VERDIm3r)/nRstI}}
 wvRenameGroup 	-win $$_nWave2 	G7 		 roundLen
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundLen}}
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundLast}}
-wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/roundCnt1round}}
+wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundCnt1round}}
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/clk100hzCNT}}
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/clk100hzO}}
 
