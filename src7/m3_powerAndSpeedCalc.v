@@ -2,24 +2,26 @@ module m3_powerAndSpeedCalc (
     m3startI                        ,
     m3forceStopI                    ,
     m3invRotateI                    ,
-    m3speedDECi                      ,
-    m3speedINCi                      ,
+    m3speedDECi                     ,
+    m3speedINCi                     ,
     m3powerINCi                     ,
     m3powerDECi                     ,
 
+    clk100hzO                       ,
     clkI                            ,
     nRstI
 );
     input   wire                m3startI        ;
     input   wire                m3forceStopI    ;
     input   wire                m3invRotateI    ;
-    input   wire                m3speedDECi      ;
-    input   wire                m3speedINCi      ;
+    input   wire                m3speedDECi     ;
+    input   wire                m3speedINCi     ;
     input   wire                m3powerINCi     ;
     input   wire                m3powerDECi     ;
 
-    input wire                  clkI            ;
-    input wire                  nRstI           ;
+    output  wire                clk100hzO       ;
+    input   wire                clkI            ;
+    input   wire                nRstI           ;
 
     /*
     *
@@ -65,6 +67,14 @@ module m3_powerAndSpeedCalc (
     reg                         roundLast   ;
     reg          [3:0]          roundCnt    ;
 
+    `ifdef  simulating
+        `define      clk100hzMax    14'd9998
+    `else
+        //`define      clk100hzMax    14'd98
+        `define      clk100hzMax    14'd9998
+    `endif
+    reg          [14:0]         clk100hzCNT ;
+
     parameter    SM_101_powerCalc_init      = 4'd0     ;
     parameter    SM_101_powerCalc_load_1    = 4'd1     ;
     parameter    SM_101_powerCalc_end       = 4'hF     ;
@@ -79,6 +89,26 @@ module m3_powerAndSpeedCalc (
         endcase
         if ( nextStep == 1'b1 && step == 4'd10 ) begin
             sm_next         = SM_101_powerCalc_init     ;
+        end
+    end
+
+    assign clk100hzO    = clk100hzCNT[14] ;
+    always @( posedge clkI or negedge nRstI ) begin
+        if ( ! nRstI ) begin
+            clk100hzCNT         <= `clk100hzMax         ;
+        end
+        else begin
+            if ( m3startI == 1'b0 ) begin
+                clk100hzCNT     <= `clk100hzMax         ;
+            end
+            else begin
+                if ( clk100hzO ) begin
+                    clk100hzCNT <= `clk100hzMax         ;
+                end
+                else begin
+                    clk100hzCNT <= clk100hzCNT - 15'd1   ;
+                end
+            end
         end
     end
 
