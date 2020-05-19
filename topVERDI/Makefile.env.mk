@@ -9,6 +9,7 @@ VERDIm3top:=$(VERDIrtlTop)/m3top
 VERDIm3r:=$(VERDIm3top)/r
 VERDIcalc:=$(VERDIm3r)/calc
 VERDIcg100:=$(VERDIcalc)/cg100
+VERDIspCalc:=$(VERDIcalc)/spCalc
 
 waveAddLine:= wvAddAllSignals -win $$_nWave2
 
@@ -89,6 +90,17 @@ wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_full}}
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_up}}
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/Sum_down}}
 
+wvRenameGroup 	-win $$_nWave2 	G9 		 spCalc
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/nextRound_1I}}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/workingI    }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3invRotateI}}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3forceStopI}}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedDECi }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedINCi }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clk100hzO   }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clkI        }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/nRstI       }}
+
 wvSelectAll
 wvSetRadix 		-win $$_nWave2 	-format UDec
 wvDeselectAll
@@ -102,6 +114,7 @@ wvCollapseGroup	TbMrMosCmp
 wvCollapseGroup	TbError9
 wvCollapseGroup	roundLen
 #wvCollapseGroup	Calc01
+#wvCollapseGroup	spCalc
 
 
 endef

@@ -1,5 +1,5 @@
 module m3_speedIncDecCalc (
-    nextRoundI                      ,
+    nextRound_1I                      ,
     workingI                        ,
     m3invRotateI                    ,
     m3forceStopI                    ,
@@ -10,7 +10,7 @@ module m3_speedIncDecCalc (
     clkI                            ,
     nRstI
 );
-    input   wire                nextRoundI      ;
+    input   wire                nextRound_1I      ;
     input   wire                workingI        ;
     input   wire                m3forceStopI    ;
     input   wire                m3invRotateI    ;
@@ -79,7 +79,7 @@ module m3_speedIncDecCalc (
                 roundLast                           <= 1'b0                 ;
             end
             else begin
-                if ( nextRoundI == 1'b1 ) begin
+                if ( nextRound_1I == 1'b1 ) begin
                     if ( m3speedINCi == 1'b1 ) begin
                         if ( roundLast == 1'b0 ) begin // ok , it is INCing
                             if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc freq 6.25%

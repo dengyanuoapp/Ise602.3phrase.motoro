@@ -79,6 +79,15 @@ module m3_powerAndSpeedCalc (
 
     m3_speedIncDecCalc
     spCalc(
+    .nextRound_1I       ( nextRound     ),
+    .workingI           ( workingW      ),
+    .m3invRotateI       ( m3invRotateI  ),
+    .m3forceStopI       ( m3forceStopI  ),
+    .m3speedDECi        ( m3speedDECi   ),
+    .m3speedINCi        ( m3speedINCi   ),
+    .clk100hzO          ( clk100hzO     ),
+    .clkI               ( clkI          ),
+    .nRstI              ( nRstI         )
     );
 
     parameter    SM_101_powerCalc_init      = 4'd0      ;
