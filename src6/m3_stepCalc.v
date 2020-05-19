@@ -8,6 +8,7 @@ module m3_stepCalc (
     m3powerDECi                     ,
 
     workingO                        ,
+    dstRoundLenI                       ,
 
     clkI                            ,
     nRstI
@@ -23,6 +24,8 @@ module m3_stepCalc (
     output  wire                workingO        ;
     input   wire                clkI            ;
     input   wire                nRstI           ;
+
+    input   wire        [31:0]  dstRoundLenI       ;
 
     /*
     *
@@ -64,7 +67,6 @@ module m3_stepCalc (
         (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
     reg          [3:0]          sm                      ;
     reg          [3:0]          sm_next                 ;
-    reg          [31:0]         roundLen                ;
     reg                         roundLast               ;
     reg          [3:0]          roundCnt1round          ;
 
@@ -104,79 +106,15 @@ module m3_stepCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            roundLen                                <= `clkPeriodMax        ;
-            roundCnt1round                          <= `roundMax            ;
-            roundLast                               <= 1'b0                 ;
+            remain            <= dstRoundLenI               ;
         end
         else begin
             if ( ! workingO ) begin
-                roundLen                            <= `clkPeriodMax        ;
-                roundCnt1round                      <= `roundMax            ;
-                roundLast                           <= 1'b0                 ;
-            end
-            else begin
-                if ( nextRound == 1'b1 ) begin
-                    if ( m3speedINCi == 1'b1 ) begin
-                        if ( roundLast == 1'b0 ) begin // ok , it is INCing
-                            if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc freq 6.25%
-                                roundCnt1round      <= `roundMax            ;
-                                if ( roundLen - roundLen[31:4] > `clkPeriodMin ) begin // reach max freq(min period)
-                                    roundLen        <= roundLen - roundLen[31:4] ;
-                                end
-                                else begin
-                                    roundLen        <= `clkPeriodMin        ;
-                                end
-                            end
-                            else begin
-                                roundCnt1round      <= roundCnt1round - 4'd1      ;
-                            end
-                        end
-                        else begin // transmit from DECing to INCing. reset counter.
-                            roundCnt1round          <= `roundMax            ; 
-                            roundLast               <= 1'b0                 ;
-                        end
-                    end 
-                    else begin
-                        if ( m3speedDECi == 1'b1 ) begin
-                            if ( roundLast == 1'b1 ) begin // ok , it is DECing
-                                if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
-                                    roundCnt1round  <= `roundMax            ;
-                                    if ( roundLen + roundLen[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
-                                        roundLen    <= `clkPeriodMax        ;
-                                    end
-                                    else begin
-                                        roundLen    <= roundLen + roundLen[31:4] ; 
-                                    end
-                                end
-                                else begin
-                                    roundCnt1round  <= roundCnt1round - 4'd1      ;
-                                end
-                            end
-                            else begin // transmit from INCing to DECing . reset counter.
-                                roundCnt1round      <= `roundMax            ; 
-                                roundLast           <= 1'b1                 ; 
-                            end
-                        end 
-                        else begin // not INCing , not DECing. reset counter.
-                            roundCnt1round          <= `roundMax            ; 
-                        end
-                    end
-                end
-            end
-        end
-    end
-
-    always @( posedge clkI or negedge nRstI ) begin
-        if ( ! nRstI ) begin
-            remain            <= roundLen               ;
-        end
-        else begin
-            if ( ! workingO ) begin
-                remain        <= roundLen               ;
+                remain        <= dstRoundLenI               ;
             end
             else begin
                 if ( nextStep == 1'b1 ) begin
-                    remain    <= roundLen               ;
+                    remain    <= dstRoundLenI               ;
                 end
                 else begin
                     remain    <= remain    - 22'd1  ;

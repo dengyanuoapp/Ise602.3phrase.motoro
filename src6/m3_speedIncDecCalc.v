@@ -6,11 +6,13 @@ module m3_speedIncDecCalc (
     m3speedDECi                     ,
     m3speedINCi                     ,
 
+    dstRoundLenO                       ,
+
     clk100hzI                       ,
     clkI                            ,
     nRstI
 );
-    input   wire                nextRound_1I      ;
+    input   wire                nextRound_1I    ;
     input   wire                workingI        ;
     input   wire                m3forceStopI    ;
     input   wire                m3invRotateI    ;
@@ -20,6 +22,7 @@ module m3_speedIncDecCalc (
     input   wire                clk100hzI       ;
     input   wire                clkI            ;
     input   wire                nRstI           ;
+    output  reg  [31:0]         dstRoundLenO       ;
 
     `ifdef    simulating
         //    +define+simulating , to reduce the VCS debug time.
@@ -34,19 +37,18 @@ module m3_speedIncDecCalc (
 
     `define   roundMax              4'd3
 
-    reg          [31:0]         roundLen                ;
     reg                         roundLast               ;
     reg          [3:0]          roundCnt1round          ;
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            roundLen                                <= `clkPeriodMax        ;
+            dstRoundLenO                               <= `clkPeriodMax        ;
             roundCnt1round                          <= `roundMax            ;
             roundLast                               <= 1'b0                 ;
         end
         else begin
             if ( workingI == 1'b0 ) begin
-                roundLen                            <= `clkPeriodMax        ;
+                dstRoundLenO                           <= `clkPeriodMax        ;
                 roundCnt1round                      <= `roundMax            ;
                 roundLast                           <= 1'b0                 ;
             end
@@ -56,11 +58,11 @@ module m3_speedIncDecCalc (
                         if ( roundLast == 1'b0 ) begin // ok , it is INCing
                             if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc freq 6.25%
                                 roundCnt1round      <= `roundMax            ;
-                                if ( roundLen - roundLen[31:4] > `clkPeriodMin ) begin // reach max freq(min period)
-                                    roundLen        <= roundLen - roundLen[31:4] ;
+                                if ( dstRoundLenO- dstRoundLenO[31:4] > `clkPeriodMin ) begin // reach max freq(min period)
+                                    dstRoundLenO       <= dstRoundLenO- dstRoundLenO[31:4] ;
                                 end
                                 else begin
-                                    roundLen        <= `clkPeriodMin        ;
+                                    dstRoundLenO       <= `clkPeriodMin        ;
                                 end
                             end
                             else begin
@@ -77,11 +79,11 @@ module m3_speedIncDecCalc (
                             if ( roundLast == 1'b1 ) begin // ok , it is DECing
                                 if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
                                     roundCnt1round  <= `roundMax            ;
-                                    if ( roundLen + roundLen[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
-                                        roundLen    <= `clkPeriodMax        ;
+                                    if ( dstRoundLenO+ dstRoundLenO[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
+                                        dstRoundLenO   <= `clkPeriodMax        ;
                                     end
                                     else begin
-                                        roundLen    <= roundLen + roundLen[31:4] ; 
+                                        dstRoundLenO   <= dstRoundLenO+ dstRoundLenO[31:4] ; 
                                     end
                                 end
                                 else begin

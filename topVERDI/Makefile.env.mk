@@ -73,7 +73,7 @@ wvAddSignal 	-win $$_nWave2 	-group 	{MrPortAll {/$(VERDIm3r)/clkI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{MrPortAll {/$(VERDIm3r)/nRstI}}
 
 wvRenameGroup 	-win $$_nWave2 	G7 		 rCalc1
-wvAddSignal 	-win $$_nWave2 	-group 	{rCalc1 {/$(VERDIrCalc)/roundLen}}
+wvAddSignal 	-win $$_nWave2 	-group 	{rCalc1 {/$(VERDIrCalc)/dstRoundLenI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{rCalc1 {/$(VERDIrCalc)/roundLast}}
 wvAddSignal 	-win $$_nWave2 	-group 	{rCalc1 {/$(VERDIrCalc)/roundCnt1round}}
 wvAddSignal 	-win $$_nWave2 	-group 	{rCalc1 {/$(VERDIcg100)/clk100hzCNT}}
@@ -100,6 +100,7 @@ wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3invRotateI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3forceStopI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedDECi }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/m3speedINCi }}
+wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/dstRoundLenO   }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clk100hzI   }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/clkI        }}
 wvAddSignal 	-win $$_nWave2 	-group 	{spCalc {/$(VERDIspCalc)/nRstI       }}
