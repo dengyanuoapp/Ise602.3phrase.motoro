@@ -67,24 +67,26 @@ module m3_powerAndSpeedCalc (
         reg          [31:0]          Sum_full           ;
         reg          [31:0]          Sum_up             ;
         reg          [31:0]          Sum_down           ;
+        /*
         always @( posedge clkI or negedge nRstI ) begin
-            if ( ! nRstI ) begin
-                Sum_full            <= 4'h0             ;
+        if ( ! nRstI ) begin
+        Sum_full            <= 4'h0             ;
             end
-            else begin
-                if ( ! workingW ) begin
-                    Sum_full        <= 31'h0            ;
-                    Sum_up          <= 31'h0            ;
-                    Sum_down        <= 31'h0            ;
+        else begin
+        if ( ! workingW ) begin
+        Sum_full        <= 31'h0            ;
+        Sum_up          <= 31'h0            ;
+        Sum_down        <= 31'h0            ;
                 end
-                else begin
-                    //if ( (0 == Sum_full) || (1 == remain) ) begin
-                    if ( (0 == Sum_full) || (1 == 2) ) begin
-                        Sum_full    <= `clkPeriodMax * `powerMax             ;
+        else begin
+        //if ( (0 == Sum_full) || (1 == remain) ) begin
+        if ( (0 == Sum_full) || (1 == 2) ) begin
+        Sum_full    <= `clkPeriodMax * `powerMax             ;
                     end
                 end
             end
         end
+        */
     `endif
 
 endmodule

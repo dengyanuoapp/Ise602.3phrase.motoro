@@ -74,8 +74,6 @@ wvAddSignal 	-win $$_nWave2 	-group 	{MrPortAll {/$(VERDIm3r)/nRstI}}
 
 wvRenameGroup 	-win $$_nWave2 	G7 		 stepCalc1
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc1 {/$(VERDIstepCalc)/dstRoundLenI}}
-wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc1 {/$(VERDIstepCalc)/roundLast}}
-wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc1 {/$(VERDIstepCalc)/roundCnt1round}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc1 {/$(VERDIcg100)/clk100hzCNT}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc1 {/$(VERDIcg100)/clk100hzO}}
 
@@ -85,8 +83,6 @@ wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/step}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/remain}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/nextStep}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/nextRound}}
-wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/sm}}
-wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/sm_next}}
 
 wvRenameGroup 	-win $$_nWave2 	G9 		 calcDebug
 wvAddSignal 	-win $$_nWave2 	-group 	{calcDebug {/$(VERDIcalc)/Sum_full}}

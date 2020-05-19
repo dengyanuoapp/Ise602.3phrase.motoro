@@ -1,4 +1,4 @@
-module m3_stepCalc (
+module m3_preCalc (
     m3startI                        ,
     m3forceStopI                    ,
     m3invRotateI                    ,
@@ -33,9 +33,44 @@ module m3_stepCalc (
     wire                        nextStep    = (remain == 22'd1);
     wire                        nextRound   = 
         (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
+    reg          [3:0]          sm                      ;
+    reg          [3:0]          sm_next                 ;
+    reg                         roundLast               ;
+    reg          [3:0]          roundCnt1round          ;
 
     assign workingO   = ( m3startI == 1'b0 || step == 4'd15 ) ;
 
+
+    parameter    SM_101_powerCalc_init      = 4'd0      ;
+    parameter    SM_101_powerCalc_load_1    = 4'd1      ;
+    parameter    SM_101_powerCalc_end       = 4'hF      ;
+
+    always @( * ) begin
+        sm_next             = sm                        ;
+        case ( sm ) 
+            SM_101_powerCalc_init :
+                sm_next     = SM_101_powerCalc_load_1   ;
+            SM_101_powerCalc_load_1 :
+                sm_next     = SM_101_powerCalc_end      ;
+        endcase
+        if ( nextStep == 1'b1 && step == 4'd10 ) begin
+            sm_next         = SM_101_powerCalc_init     ;
+        end
+    end
+
+    always @( posedge clkI or negedge nRstI ) begin
+        if ( ! nRstI ) begin
+            sm                  <= SM_101_powerCalc_init          ;
+        end
+        else begin
+            if ( ! workingO ) begin
+                sm              <= SM_101_powerCalc_init          ;
+            end
+            else begin
+                sm              <= sm_next                        ;
+            end
+        end
+    end
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
