@@ -35,7 +35,7 @@ module m3_powerAndSpeedCalc (
     );
 
     m3_speedIncDecCalc
-    spCalc(
+    speedCalc(
         .nextRound_1I       ( 1'b0          ),
         .workingI           ( workingW      ),
         .m3invRotateI       ( m3invRotateI  ),
@@ -49,7 +49,7 @@ module m3_powerAndSpeedCalc (
     );
 
     m3_stepCalc
-    rCalc(
+    stepCalc(
         .m3startI       ( m3startI           ),
         .m3forceStopI   ( m3forceStopI       ),
         .m3invRotateI   ( m3invRotateI       ),
