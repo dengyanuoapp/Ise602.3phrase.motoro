@@ -55,17 +55,17 @@ module m3_powerAndSpeedCalc (
     *     Sdown(xx_)  =  (1 - ( nowStepEndEdge / len ) * ( 1 - 0.8660254038) ) / 2 * Stotal
     */
 
-    reg          [3:0]          step        ;
-    reg          [21:0]         remain      ;
-    reg          [21:0]         remain_next ;
+    reg          [3:0]          step                    ;
+    reg          [21:0]         remain                  ;
+    reg          [21:0]         remain_next             ;
     wire                        nextStep    = (remain == 22'd1);
     wire                        nextRound   = 
         (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
-    reg          [3:0]          sm          ;
-    reg          [3:0]          sm_next     ;
-    reg          [31:0]         roundLen    ;
-    reg                         roundLast   ;
-    reg          [3:0]          roundCnt    ;
+    reg          [3:0]          sm                      ;
+    reg          [3:0]          sm_next                 ;
+    reg          [31:0]         roundLen                ;
+    reg                         roundLast               ;
+    reg          [3:0]          roundCnt1round          ;
 
     `ifdef  simulating
         `define      clk100hzMax    14'd9998
@@ -75,9 +75,9 @@ module m3_powerAndSpeedCalc (
     `endif
     reg          [14:0]         clk100hzCNT ;
 
-    parameter    SM_101_powerCalc_init      = 4'd0     ;
-    parameter    SM_101_powerCalc_load_1    = 4'd1     ;
-    parameter    SM_101_powerCalc_end       = 4'hF     ;
+    parameter    SM_101_powerCalc_init      = 4'd0      ;
+    parameter    SM_101_powerCalc_load_1    = 4'd1      ;
+    parameter    SM_101_powerCalc_end       = 4'hF      ;
 
     always @( * ) begin
         sm_next             = sm                        ;
@@ -106,7 +106,7 @@ module m3_powerAndSpeedCalc (
                     clk100hzCNT <= `clk100hzMax         ;
                 end
                 else begin
-                    clk100hzCNT <= clk100hzCNT - 15'd1   ;
+                    clk100hzCNT <= clk100hzCNT - 15'd1  ;
                 end
             end
         end
@@ -129,21 +129,21 @@ module m3_powerAndSpeedCalc (
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
             roundLen                                <= `clkPeriodMax        ;
-            roundCnt                                <= `roundMax            ;
+            roundCnt1round                          <= `roundMax            ;
             roundLast                               <= 1'b0                 ;
         end
         else begin
             if ( m3startI == 1'b0 || step == 4'd15 ) begin
                 roundLen                            <= `clkPeriodMax        ;
-                roundCnt                            <= `roundMax            ;
+                roundCnt1round                      <= `roundMax            ;
                 roundLast                           <= 1'b0                 ;
             end
             else begin
                 if ( nextRound == 1'b1 ) begin
                     if ( m3speedINCi == 1'b1 ) begin
                         if ( roundLast == 1'b0 ) begin // ok , it is INCing
-                            if ( roundCnt == 4'd0 ) begin // 1/16 --> inc freq 6.25%
-                                roundCnt            <= `roundMax            ;
+                            if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc freq 6.25%
+                                roundCnt1round      <= `roundMax            ;
                                 if ( roundLen - roundLen[31:4] > `clkPeriodMin ) begin // reach max freq(min period)
                                     roundLen        <= roundLen - roundLen[31:4] ;
                                 end
@@ -152,19 +152,19 @@ module m3_powerAndSpeedCalc (
                                 end
                             end
                             else begin
-                                roundCnt            <= roundCnt - 4'd1      ;
+                                roundCnt1round      <= roundCnt1round - 4'd1      ;
                             end
                         end
                         else begin // transmit from DECing to INCing. reset counter.
-                            roundCnt                <= `roundMax            ; 
+                            roundCnt1round          <= `roundMax            ; 
                             roundLast               <= 1'b0                 ;
                         end
                     end 
                     else begin
                         if ( m3speedDECi == 1'b1 ) begin
                             if ( roundLast == 1'b1 ) begin // ok , it is DECing
-                                if ( roundCnt == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
-                                    roundCnt        <= `roundMax            ;
+                                if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
+                                    roundCnt1round  <= `roundMax            ;
                                     if ( roundLen + roundLen[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
                                         roundLen    <= `clkPeriodMax        ;
                                     end
@@ -173,16 +173,16 @@ module m3_powerAndSpeedCalc (
                                     end
                                 end
                                 else begin
-                                    roundCnt        <= roundCnt - 4'd1      ;
+                                    roundCnt1round  <= roundCnt1round - 4'd1      ;
                                 end
                             end
                             else begin // transmit from INCing to DECing . reset counter.
-                                roundCnt            <= `roundMax            ; 
+                                roundCnt1round      <= `roundMax            ; 
                                 roundLast           <= 1'b1                 ; 
                             end
                         end 
                         else begin // not INCing , not DECing. reset counter.
-                            roundCnt                <= `roundMax            ; 
+                            roundCnt1round          <= `roundMax            ; 
                         end
                     end
                 end
