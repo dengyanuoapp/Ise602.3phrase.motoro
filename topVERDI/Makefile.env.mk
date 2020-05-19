@@ -8,6 +8,7 @@ VERDIrtlTop:=$(VERDItb)/rtlTop
 VERDIm3top:=$(VERDIrtlTop)/m3top
 VERDIm3r:=$(VERDIm3top)/r
 VERDIcalc:=$(VERDIm3r)/calc
+VERDIcg100:=$(VERDIcalc)/cg100
 
 waveAddLine:= wvAddAllSignals -win $$_nWave2
 
@@ -71,10 +72,10 @@ wvAddSignal 	-win $$_nWave2 	-group 	{MrPortAll {/$(VERDIm3r)/nRstI}}
 
 wvRenameGroup 	-win $$_nWave2 	G7 		 roundLen
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundLen}}
-wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundCnt}}
 wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/roundLast}}
-wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/clk100hzCNT}}
-wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcalc)/clk100hzO}}
+wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/roundCnt1round}}
+wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/clk100hzCNT}}
+wvAddSignal 	-win $$_nWave2 	-group 	{roundLen {/$(VERDIcg100)/clk100hzO}}
 
 wvRenameGroup 	-win $$_nWave2 	G8 		 Calc01
 wvAddSignal 	-win $$_nWave2 	-group 	{Calc01 {/$(VERDIcalc)/clkI}}
