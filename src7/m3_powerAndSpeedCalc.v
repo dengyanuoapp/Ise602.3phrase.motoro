@@ -66,14 +66,16 @@ module m3_powerAndSpeedCalc (
     reg          [31:0]         roundLen                ;
     reg                         roundLast               ;
     reg          [3:0]          roundCnt1round          ;
+    wire                        workingW   = ( m3startI == 1'b0 || step == 4'd15 ) ;
 
-    `ifdef  simulating
-        `define      clk100hzMax    14'd9998
-    `else
-        //`define      clk100hzMax    14'd98
-        `define      clk100hzMax    14'd9998
-    `endif
-    reg          [14:0]         clk100hzCNT ;
+
+    clkGen_1Mhz_to_100Hz
+    cg100(
+        .workingI       ( workingW      ),
+        .clk100hzO      ( clk100hzO     ),
+        .clkI           ( clkI          ),
+        .nRstI          ( nRstI         )
+    );
 
     parameter    SM_101_powerCalc_init      = 4'd0      ;
     parameter    SM_101_powerCalc_load_1    = 4'd1      ;
@@ -92,32 +94,12 @@ module m3_powerAndSpeedCalc (
         end
     end
 
-    assign clk100hzO    = clk100hzCNT[14] ;
-    always @( posedge clkI or negedge nRstI ) begin
-        if ( ! nRstI ) begin
-            clk100hzCNT         <= `clk100hzMax         ;
-        end
-        else begin
-            if ( m3startI == 1'b0 ) begin
-                clk100hzCNT     <= `clk100hzMax         ;
-            end
-            else begin
-                if ( clk100hzO ) begin
-                    clk100hzCNT <= `clk100hzMax         ;
-                end
-                else begin
-                    clk100hzCNT <= clk100hzCNT - 15'd1  ;
-                end
-            end
-        end
-    end
-
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
             sm                  <= SM_101_powerCalc_init          ;
         end
         else begin
-            if ( m3startI == 1'b0 ) begin
+            if ( ! workingW ) begin
                 sm              <= SM_101_powerCalc_init          ;
             end
             else begin
@@ -133,7 +115,7 @@ module m3_powerAndSpeedCalc (
             roundLast                               <= 1'b0                 ;
         end
         else begin
-            if ( m3startI == 1'b0 || step == 4'd15 ) begin
+            if ( ! workingW ) begin
                 roundLen                            <= `clkPeriodMax        ;
                 roundCnt1round                      <= `roundMax            ;
                 roundLast                           <= 1'b0                 ;
@@ -195,7 +177,7 @@ module m3_powerAndSpeedCalc (
             remain            <= roundLen               ;
         end
         else begin
-            if ( m3startI == 1'b0 ) begin
+            if ( ! workingW ) begin
                 remain        <= roundLen               ;
             end
             else begin
@@ -214,7 +196,7 @@ module m3_powerAndSpeedCalc (
             step                <= 4'hF                 ;
         end
         else begin
-            if ( m3startI == 1'b0 ) begin
+            if ( ! workingW ) begin
                 step            <= 4'hF                 ;
             end
             else begin
@@ -239,7 +221,7 @@ module m3_powerAndSpeedCalc (
                 Sum_full            <= 4'h0             ;
             end
             else begin
-                if ( m3startI == 1'b0 ) begin
+                if ( ! workingW ) begin
                     Sum_full        <= 31'h0            ;
                     Sum_up          <= 31'h0            ;
                     Sum_down        <= 31'h0            ;
