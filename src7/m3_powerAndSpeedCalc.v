@@ -75,7 +75,8 @@ module m3_powerAndSpeedCalc (
                     Sum_down        <= 31'h0            ;
                 end
                 else begin
-                    if ( (0 == Sum_full) || (1 == remain) ) begin
+                    //if ( (0 == Sum_full) || (1 == remain) ) begin
+                    if ( (0 == Sum_full) || (1 == 2) ) begin
                         Sum_full    <= `clkPeriodMax * `powerMax             ;
                     end
                 end
