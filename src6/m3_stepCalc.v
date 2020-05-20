@@ -38,8 +38,8 @@ module m3_stepCalc (
 
     assign workingO     = ( m3startI && (step != 4'd15 )) ;
 
-    //assign nextCalc_1o  = (nextStep_1 && (step == 4'd10)) ;
-    assign nextCalc_1o  = (nextStep_1 && (step == 4'd11)) ;
+    assign nextCalc_1o  = (nextStep_1 && (step == 4'd10)) ;
+    //assign nextCalc_1o  = (nextStep_1 && (step == 4'd11)) ;
 
 
     always @( posedge clkI or negedge nRstI ) begin
