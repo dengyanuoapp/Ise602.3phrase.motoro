@@ -35,7 +35,7 @@ module m3_stepCalc (
     wire                        nextRound   = 
         (nextStep_1 == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
 
-    assign workingO   = ( m3startI && (step < 4'd11 )) ;
+    assign workingO   = ( m3startI && (step != 4'd15 )) ;
 
 
     always @( posedge clkI or negedge nRstI ) begin
@@ -63,7 +63,7 @@ module m3_stepCalc (
             step                <= 4'hF                 ;
         end
         else begin
-            if ( ! workingO ) begin
+            if ( ! m3startI ) begin
                 step            <= 4'hF                 ;
             end
             else begin

@@ -83,7 +83,7 @@ wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/clkI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/workingO}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/step}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/remain}}
-wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/nextStep}}
+wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/nextStep_1}}
 wvAddSignal 	-win $$_nWave2 	-group 	{stepCalc2 {/$(VERDIstepCalc)/nextRound}}
 
 wvRenameGroup 	-win $$_nWave2 	G9 		 calcDebug
