@@ -93,13 +93,12 @@ wvAddSignal 	-win $$_nWave2 	-group 	{calcDebug {/$(VERDIcalc)/Sum_up}}
 wvAddSignal 	-win $$_nWave2 	-group 	{calcDebug {/$(VERDIcalc)/Sum_down}}
 
 wvRenameGroup 	-win $$_nWave2 	G10 		 speedCalc
-wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/nextRound_1I}}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/workingI    }}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/m3invRotateI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/m3forceStopI}}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/m3speedDECi }}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/m3speedINCi }}
-wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/dstRoundLenO   }}
+wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/nextCalc_1I }}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/clk100hzI   }}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/clkI        }}
 wvAddSignal 	-win $$_nWave2 	-group 	{speedCalc {/$(VERDIspeedCalc)/nRstI       }}
