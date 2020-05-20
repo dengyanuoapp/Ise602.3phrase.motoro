@@ -81,7 +81,7 @@ module m3_powerAndSpeedCalc (
         else begin
         //if ( (0 == Sum_full) || (1 == remain) ) begin
         if ( (0 == Sum_full) || (1 == 2) ) begin
-        Sum_full    <= `clkPeriodMax * `powerMax             ;
+        Sum_full    <= `eachSlicePeriodMax * `powerMax             ;
                     end
                 end
             end

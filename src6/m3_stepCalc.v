@@ -1,3 +1,4 @@
+`include "motor602_rtl_top.def.inc.v"
 module m3_stepCalc (
     m3startI                        ,
     m3forceStopI                    ,
@@ -39,7 +40,8 @@ module m3_stepCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            remain            <= dstRoundLenI               ;
+            remain            <= `eachSlicePeriodMax        ;
+            //remain            <= dstRoundLenI               ;
         end
         else begin
             if ( ! workingO ) begin

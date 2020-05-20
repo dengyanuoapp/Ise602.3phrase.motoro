@@ -1,3 +1,4 @@
+`include "motor602_rtl_top.def.inc.v"
 module m3_speedIncDecCalc (
     nextRound_1I                      ,
     workingI                        ,
@@ -24,15 +25,6 @@ module m3_speedIncDecCalc (
     input   wire                nRstI           ;
     output  reg  [31:0]         dstRoundLenO       ;
 
-    `ifdef    simulating
-        //    +define+simulating , to reduce the VCS debug time.
-        //`define   clkPeriodMax      22'd400
-        `define   clkPeriodMax      22'd300
-        //`define   clkPeriodMax      22'd200
-        //`define   clkPeriodMax      22'd100
-    `else
-        `define   clkPeriodMax      22'd4000000
-    `endif
     `define   clkPeriodMin          22'd40
 
     `define   roundMax              4'd3
@@ -42,13 +34,13 @@ module m3_speedIncDecCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            dstRoundLenO                               <= `clkPeriodMax        ;
+            dstRoundLenO                               <= `eachSlicePeriodMax        ;
             roundCnt1round                          <= `roundMax            ;
             roundLast                               <= 1'b0                 ;
         end
         else begin
             if ( workingI == 1'b0 ) begin
-                dstRoundLenO                           <= `clkPeriodMax        ;
+                dstRoundLenO                           <= `eachSlicePeriodMax        ;
                 roundCnt1round                      <= `roundMax            ;
                 roundLast                           <= 1'b0                 ;
             end
@@ -79,8 +71,8 @@ module m3_speedIncDecCalc (
                             if ( roundLast == 1'b1 ) begin // ok , it is DECing
                                 if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
                                     roundCnt1round  <= `roundMax            ;
-                                    if ( dstRoundLenO+ dstRoundLenO[31:4] > `clkPeriodMax ) begin // reach min freq(max period)
-                                        dstRoundLenO   <= `clkPeriodMax        ;
+                                    if ( dstRoundLenO+ dstRoundLenO[31:4] > `eachSlicePeriodMax ) begin // reach min freq(max period)
+                                        dstRoundLenO   <= `eachSlicePeriodMax        ;
                                     end
                                     else begin
                                         dstRoundLenO   <= dstRoundLenO+ dstRoundLenO[31:4] ; 

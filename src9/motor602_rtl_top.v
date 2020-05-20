@@ -50,7 +50,7 @@ module motor602_rtl_top(
 
     wire                        clkUtxW ;
     wire                        clk1MhzW;			// 1MHz
-    wire    [`busWIDTH:1]            busDefault ;
+    //wire    [`busWIDTH:1]       busDefault ;
 
 
     //assign {tp01o , tp02o } = { nRstI   , ~nRstI   };
