@@ -1,19 +1,19 @@
 `include "motor602_rtl_top.def.inc.v"
 module m3_speedIncDecCalc (
-    nextRound_1I                      ,
+    nextCalc_1I                     ,
     workingI                        ,
     m3invRotateI                    ,
     m3forceStopI                    ,
     m3speedDECi                     ,
     m3speedINCi                     ,
 
-    dstRoundLenO                       ,
+    dstRoundLenO                    ,
 
     clk100hzI                       ,
     clkI                            ,
     nRstI
 );
-    input   wire                nextRound_1I    ;
+    input   wire                nextCalc_1I     ;
     input   wire                workingI        ;
     input   wire                m3forceStopI    ;
     input   wire                m3invRotateI    ;
@@ -23,7 +23,7 @@ module m3_speedIncDecCalc (
     input   wire                clk100hzI       ;
     input   wire                clkI            ;
     input   wire                nRstI           ;
-    output  reg  [31:0]         dstRoundLenO       ;
+    output  reg  [31:0]         dstRoundLenO    ;
 
     `define   clkPeriodMin          22'd40
 
@@ -34,18 +34,18 @@ module m3_speedIncDecCalc (
 
     always @( posedge clkI or negedge nRstI ) begin
         if ( ! nRstI ) begin
-            dstRoundLenO                               <= `eachSlicePeriodMax        ;
+            dstRoundLenO                            <= `eachSlicePeriodMax        ;
             roundCnt1round                          <= `roundMax            ;
             roundLast                               <= 1'b0                 ;
         end
         else begin
             if ( workingI == 1'b0 ) begin
-                dstRoundLenO                           <= `eachSlicePeriodMax        ;
+                dstRoundLenO                        <= `eachSlicePeriodMax        ;
                 roundCnt1round                      <= `roundMax            ;
                 roundLast                           <= 1'b0                 ;
             end
             else begin
-                if ( nextRound_1I == 1'b1 ) begin
+                if ( nextCalc_1I  == 1'b1 ) begin
                     if ( m3speedINCi == 1'b1 ) begin
                         if ( roundLast == 1'b0 ) begin // ok , it is INCing
                             if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc freq 6.25%
@@ -71,7 +71,7 @@ module m3_speedIncDecCalc (
                             if ( roundLast == 1'b1 ) begin // ok , it is DECing
                                 if ( roundCnt1round == 4'd0 ) begin // 1/16 --> inc 6.25%, dec freq 6.25%
                                     roundCnt1round  <= `roundMax            ;
-                                    if ( dstRoundLenO+ dstRoundLenO[31:4] > `eachSlicePeriodMax ) begin // reach min freq(max period)
+                                    if ( dstRoundLenO + dstRoundLenO[31:4] > `eachSlicePeriodMax ) begin // reach min freq(max period)
                                         dstRoundLenO   <= `eachSlicePeriodMax        ;
                                     end
                                     else begin
