@@ -35,8 +35,7 @@ module m3_stepCalc (
     reg          [21:0]         remain_next             ;
     wire    nextStep_1  = (remain == 22'd1);
     wire    nextRound   = (nextStep_1 == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
-    //wire    nextCalc_1o = (nextStep_1 && (step == 4'd10)) ;
-    wire    nextCalc_1o = (step == 4'd10) ;
+    assign  nextCalc_1o = (nextStep_1 && (step == 4'd10)) ;
 
     assign workingO   = ( m3startI && (step != 4'd15 )) ;
 
