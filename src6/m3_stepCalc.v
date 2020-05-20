@@ -8,8 +8,9 @@ module m3_stepCalc (
     m3powerINCi                     ,
     m3powerDECi                     ,
 
+    nextCalc_1o                     ,
     workingO                        ,
-    dstRoundLenI                       ,
+    dstRoundLenI                    ,
 
     clkI                            ,
     nRstI
@@ -23,6 +24,7 @@ module m3_stepCalc (
     input   wire                m3powerDECi     ;
 
     output  wire                workingO        ;
+    output  wire                nextCalc_1o     ;
     input   wire                clkI            ;
     input   wire                nRstI           ;
 
@@ -34,6 +36,7 @@ module m3_stepCalc (
     wire                        nextStep_1    = (remain == 22'd1);
     wire                        nextRound   = 
         (nextStep_1 == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
+    wire                        nextCalc_1o = (nextStep_1 && (step == 4'd10)) ;
 
     assign workingO   = ( m3startI && (step != 4'd15 )) ;
 

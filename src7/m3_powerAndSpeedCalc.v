@@ -24,7 +24,8 @@ module m3_powerAndSpeedCalc (
     input   wire                nRstI           ;
 
     wire                        workingW        ;
-    wire            [31:0]      dstRoundLenW       ;
+    wire                        nextCalc_1w     ;
+    wire            [31:0]      dstRoundLenW    ;
 
     clkGen_1Mhz_to_100Hz
     cg100(
@@ -42,7 +43,7 @@ module m3_powerAndSpeedCalc (
         .m3forceStopI       ( m3forceStopI  ),
         .m3speedDECi        ( m3speedDECi   ),
         .m3speedINCi        ( m3speedINCi   ),
-        .dstRoundLenO          ( dstRoundLenW     ),
+        .dstRoundLenO       ( dstRoundLenW  ),
         .clk100hzI          ( clk100hzO     ),
         .clkI               ( clkI          ),
         .nRstI              ( nRstI         )
@@ -57,8 +58,9 @@ module m3_powerAndSpeedCalc (
         .m3speedINCi    ( m3speedINCi        ),
         .m3powerINCi    ( m3powerINCi        ),
         .m3powerDECi    ( m3powerDECi        ),
-        .dstRoundLenI      ( dstRoundLenW         ),
+        .dstRoundLenI   ( dstRoundLenW       ),
         .workingO       ( workingW           ),
+        .nextCalc_1o    ( nextCalc_1w        ),
         .clkI           ( clkI               ),
         .nRstI          ( nRstI              )
     );
