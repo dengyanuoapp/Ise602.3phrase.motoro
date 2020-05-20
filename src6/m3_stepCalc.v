@@ -31,11 +31,11 @@ module m3_stepCalc (
     reg          [3:0]          step                    ;
     reg          [21:0]         remain                  ;
     reg          [21:0]         remain_next             ;
-    wire                        nextStep    = (remain == 22'd1);
+    wire                        nextStep_1    = (remain == 22'd1);
     wire                        nextRound   = 
-        (nextStep == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
+        (nextStep_1 == 1'b1 ) && ((step == 4'd15) || (step == 4'd11)) ;
 
-    assign workingO   = ( m3startI == 1'b0 || step == 4'd15 ) ;
+    assign workingO   = ( m3startI && (step < 4'd11 )) ;
 
 
     always @( posedge clkI or negedge nRstI ) begin
@@ -44,11 +44,11 @@ module m3_stepCalc (
             //remain            <= dstRoundLenI               ;
         end
         else begin
-            if ( ! workingO ) begin
-                remain        <= dstRoundLenI               ;
+            if ( ! m3startI ) begin
+                remain        <= `eachSlicePeriodMax        ;
             end
             else begin
-                if ( nextStep == 1'b1 ) begin
+                if ( nextStep_1 ) begin
                     remain    <= dstRoundLenI               ;
                 end
                 else begin
@@ -67,7 +67,7 @@ module m3_stepCalc (
                 step            <= 4'hF                 ;
             end
             else begin
-                if ( nextStep == 1'b1 ) begin
+                if ( nextStep_1 == 1'b1 ) begin
                     if ( step == 4'd11 ) begin
                         step    <= 4'd0                 ;
                     end
