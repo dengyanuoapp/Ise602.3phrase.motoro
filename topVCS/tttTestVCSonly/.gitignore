@@ -9,3 +9,11 @@ Counter.vcd
 novas_dump.log
 verdi.fsdb
 innovus.log*
+xcelium.d/
+xmelab.log
+xmsim.log
+xmvlog.log
+xmverilog.history
+xmverilog.log
+
+

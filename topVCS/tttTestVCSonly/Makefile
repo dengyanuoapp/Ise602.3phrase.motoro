@@ -83,6 +83,7 @@ qut          -->>>    QUANTUS_HOME=/e/eda2151/QUANTUS20/quantus20 , OA_UNSUPPORT
 
 nc1           -->>>    ncverilog
 nc2           -->>>    nclog
+nc3           -->>>    nclog with fsdb
 
 endef
 export show_help_text
@@ -195,9 +196,11 @@ qut:
 VRST_HOME=/e/eda2161/xce19.09
 ######################## nc : begin
 nc_CMD_path:=\
-	$(LM_LICENSE_FILE)                          			\
-	VRST_HOME=$(VRST_HOME)   								\
-	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools.lnx86/bin:$${PATH}   
+	LD_LIBRARY_PATH=$(VERDI_HOME)/share/PLI/IUS/linux64/boot \
+	VERDI_HOME=$(VERDI_HOME)                    \
+	$(LM_LICENSE_FILE)                          \
+	VRST_HOME=$(VRST_HOME)   					\
+	PATH=$(VRST_HOME)/tools.lnx86/bin/64bit:$(VRST_HOME)/bin:$${PATH}   
 
 nc_CMD_build:=$(nc_CMD_path) \
 	xmverilog        \
@@ -225,6 +228,25 @@ nc2: clean
 		-NOLICSuspend -messages \
 		-access +r+w+c \
 		Counter_tb
+	$(nc_CMD_path)  xmsim \
+		-NOLICSuspend -message \
+		Counter_tb
+
+nc3: clean nc31 nc32 nc33
+nc31: clean
+	mkdir -p /tmp/simvision/
+	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
+	$(nc_CMD_path)  xmvlog \
+		-message \
+		+define+VERDI_HOME=\"$(VERDI_HOME)\"                    \
+		ttt/Counter.v ttt/Counter_tb.v   
+nc32: 
+	$(nc_CMD_path)  xmelab \
+	-loadpli1 debpli:novas_pli_boot \
+		-NOLICSuspend -messages \
+		-access +r+w+c \
+		Counter_tb
+nc33: 
 	$(nc_CMD_path)  xmsim \
 		-NOLICSuspend -message \
 		Counter_tb
