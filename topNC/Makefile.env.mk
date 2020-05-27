@@ -1,4 +1,7 @@
-topModule:=motoro301_tb
+
+#topModule:=motoro301_tb
+topModule:=motor602_tb
+
 DEV01:=xc3s500e-pq208-4
 
 CFGmakeRun:=Makefile.run.cadenceNC.mk

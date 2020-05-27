@@ -44,16 +44,17 @@ module motor602_real(
 
     m3_powerAndSpeedCalc 
     calc(
-        .m3startI        (   m3startI         ),
-        .m3speedDECi      (   m3speedDECi       ),
-        .m3speedINCi      (   m3speedINCi       ),
-        .m3powerINCi     (   m3powerINCi      ),
-        .m3powerDECi     (   m3powerDECi      ),
-        .m3forceStopI    (   m3forceStopI     ),
-        .m3invRotateI    (   m3invRotateI     ),
+        .m3startI           ( m3startI      ),
+        .m3speedDECi        ( m3speedDECi   ),
+        .m3speedINCi        ( m3speedINCi   ),
+        .m3powerINCi        ( m3powerINCi   ),
+        .m3powerDECi        ( m3powerDECi   ),
+        .m3forceStopI       ( m3forceStopI  ),
+        .m3invRotateI       ( m3invRotateI  ),
 
-        .clkI            ( clkI  ),
-        .nRstI           ( nRstI ) 
+        .clk100hzO          (      ),
+        .clkI               ( clkI          ),
+        .nRstI              ( nRstI         ) 
     );
 
     motor3_irs2007s_driver
