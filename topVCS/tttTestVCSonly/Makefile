@@ -119,6 +119,8 @@ c clean:
 		xcelium.d/                                              \
 		xmverilog.history                                       \
 		xmverilog.log                                           \
+		xmvlog.log                                              \
+		xmsim.log                                              \
 		innovus.log  innovus.log[0-9]*                          \
 		innovus.logv innovus.logv[0-9]*                         \
 		novas_dump.log                                          \
@@ -188,12 +190,24 @@ qut:
 
 VRST_HOME=/e/eda2161/xce19.09
 ######################## nc : begin
-nc_CMD:=\
+nc_CMD_path:=\
 	$(LM_LICENSE_FILE)                          			\
 	VRST_HOME=$(VRST_HOME)   								\
-	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools/bin:$${PATH}   \
-	xmverilog     ttt/Counter.v
+	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools/bin:$${PATH}   
+
+nc_CMD_build:=$(nc_CMD_path) \
+	xmvlog        \
+	ttt/Counter_tb.v   \
+	ttt/Counter.v
+
+nc_CMD_sim:=$(nc_CMD_path)\
+	xmsim        \
+	Counter_tb
+
 nc:
-	$(nc_CMD)
+	mkdir -p /tmp/simvision/
+	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
+	$(nc_CMD_build)
+	$(nc_CMD_sim)
 ######################## nc : end
 
