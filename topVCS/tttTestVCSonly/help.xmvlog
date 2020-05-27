@@ -1,0 +1,127 @@
+xmvlog: 19.09-s001: (c) Copyright 1995-2019 Cadence Design Systems, Inc.
+  Usage:
+	xmvlog [options] source_file ...
+
+  Options:
+	-64BIT                       -- Invoke 64 bit executable
+	-ABV2COPT                    -- Enable optimization for two cycle implication style assertion
+	-ABVEVALNOCHANGE             -- Reverses optimization for no-change in inputs expressions scenario
+	-ABVNOEBSINAOPT              -- Enable finish->inactive transition in single cycle SVA
+	-ABVRECORDDEBUGINFO          -- Enhance debugging message for concurrent assertions
+	-ABVRECORDVACUOUS            -- Enable recording of vacuous and attempts counts
+	-AMS                         -- Enable ams parsing
+	-APPEND_LOG                  -- Append the log to an existing logfile
+	-ASSERT                      -- Enable PSL language features
+	-CBNOFORWARDCLOCKINGEVENT    -- Don't allow identifier in clocking event of clocking block to be declared after the block
+	-CDSLIB <arg>                -- Specifies the cds.lib file to be used
+	-CDS_ALTERNATE_TMPDIR <arg>  -- Specify alternate location for reading design data
+	-CDS_IMPLICIT_TMPDIR <arg>   -- Specify location for design data storage
+	-CDS_IMPLICIT_TMPONLY        -- Force xmvlog to read design data only from the TMPDIR area
+	-CD_LEXPRAGMA                -- process verilog preprocessor directive before lexical pragmas
+	-CHECKTASKS                  -- Checks that all $tasks are predefined system tasks
+	-CLASSLINEDEBUG              -- Enable line debug only for design units with classes
+	-CMDFILE <arg>               -- Specifies a configuration file for design-top compilation
+	-COMPARE_STRICT_TIMESCALE    -- Compare strict LRM timescale calculation and default
+	-COMPCNFG                    -- Compile Verilog configuration in source HDL
+	-CONFIG_ALLOW_ESCAPED_NAME   -- Support escaped names inside Verilog config blocks
+	-CONTROLASSERT <arg>         -- Specifies a file containing assertion control statements
+	-CP_EXPR_AS_NAME             -- Use coverpoint expression as its name 
+	-DEFAULT_SPICE_OOMR          -- Use default value for Spice OOMR
+	-DEFINE <arg>                -- Defines a macro
+	-DELAY_TRIGGER               -- Delay triggering of @ waiters
+	-DESIGN_TOP <arg>            -- Specifies top design-unit for design-top compilation
+	-DISABLE_CF                  -- Disable marking system functions as const expr
+	-DISABLE_DBITS               -- Disable improved $bits behavior
+	-DISABLE_FAST_DECOMPRESS     -- Disable faster decompression of compressed files (prepared by gzip or compress)
+	-ENABLE_CF                   -- Enable marking system functions as const expr
+	-ENABLE_DBITS                -- Enable improved $bits behavior
+	-ENABLE_STRICT_TIMESCALE     -- Enable strict LRM timescale calculation
+	-ENABLE_SVAFUNCCALLFIX       -- Enable function call sampling and evalaution in assertions
+	-ERRORMAX <arg>              -- Specifies the maximum number of errors processed
+	-ESCAPEDNAME                 -- Prints out escaped name of the design unit
+	-FILE <arg>                  -- Load command line arguments from <arg>
+	-GENASSERT_SYNTH_PRAGMA      -- Enable generation of assertions from synthesis pragmas
+	-HDLVAR <arg>                -- Specifies the hdl.var file to be used
+	-HELP                        -- Prints this message
+	-IAL <arg>                   -- Specifies the configuration of the IAL verification library to be compiled
+	-IEEE1364                    -- Report errors according to the IEEE 1364 standard
+	-IGNORE_PRAGMA <arg>         -- Ignore the specified pragma
+	-IGNORE_SPICE_OOMR           -- Ignore Spice OOMR
+	-INCDIR <arg>                -- Specifies an include directory 
+	-LEXPRAGMA                   -- Enable Lexical Pragma processing
+	-LIBCELL                     -- Mark all cells with `celldefine
+	-LIBMAP <arg>                -- Specify the Verilog library mapping file
+	-LINEDEBUG                   -- Enable line debug capabilities
+	-LOGFILE <arg>               -- Specifies the file to contain log information
+	-MESSAGES                    -- Specifies printing of informative messages
+	-MODELINCDIR <arg>           -- to specify a list of directories separated by ':'
+	-MODELPATH <arg>             -- to specify a list of source files/directories of source files [with/without section identifiers]
+	-NEVERWARN                   -- Disables printing of all warning messages
+	-NEWPERF                     -- Umbrella option for new performance optimizations
+	-NOASSERT_SYNTH_PRAGMA       -- Disable generation of assertions from synthesis pragmas
+	-NOCOPYRIGHT                 -- Suppresses printing of copyright banner
+	-NOLINE                      -- Do not locate source line on errors
+	-NOLINK                      -- When using 5x structure do not create links
+	-NOLOG                       -- Suppress generation of the default logfile
+	-NOMEMPACK
+	-NOPRAGMAWARN                -- Disable pragma related warning messages.
+	-NOSTDOUT                    -- Turn off output to screen
+	-NOWARN <arg>                -- Disables printing of the specified warning message
+	-NXMBIND  [Deprecates: NNCBIND] -- Turn on new SV bind. This implementation is now available as default, hence the switch need not be specified any longer.
+	-OVL <arg>                   -- Specifies the configuration of the OVL verification library to be compiled
+	-OXMBIND                     -- Use old SV bind flow.
+	-PARSEINFO <arg>             -- Print tick-inlcude full path information. 
+	-PERFLOG <arg>               -- Writes performance statistics in the specified file
+	-PERFSTAT                    -- Writes performance statistics in xmperfstat.out
+	-PLUSPERF                    -- Umbrella option for simulation perf optimizations
+	-PRAGMA                      -- Enable pragma processing
+	-PROPDIR <arg>               -- Specifies the directory to consider when searching for external property files
+	-PROPEXT <arg>               -- Specifies extensions to consider when searching for external property files
+	-PROPFILE <arg>              -- Specifies a file containing PSL verification code
+	-PROPSPATH <arg>             -- to specify an occurence property data base file
+	-QUIET                       -- No error/warning summary output
+	-RMKEYWORD <arg>             -- Specifies the keyword to be removed
+	-RNM_RELAX                   -- Non-compliant IEEE 1800 usage for Real Number Modeling
+	-SCU                         -- Multiple compile unit while compiler directives are cleared at end of each file
+	-SHORTREAL                   -- Enables shortreal parsing
+	-SPECIFICUNIT <arg>          -- Only compile the specified unit from the source file
+	-SPECTRE_E                   -- run spectre parser with '-E' option (cpp on) when parsing files specified by -MODELPATH
+	-SPECTRE_SPP                 -- run spectre parser with '-SPP' option (spp on) when parsing files specified by -MODELPATH
+	-STATUS                      -- dump out the status line at the end
+	-SV                          -- Enable SystemVerilog features
+	-SYSV05                      -- Enable SystemVerilog features with only SV-2005 and earlier keywords
+	-SYSV09                      -- Enable SystemVerilog features with only SV-2009 and earlier keywords
+	-SYSV2005                    -- Enable SystemVerilog features with only SV-2005 and earlier keywords
+	-SYSV2009                    -- Enable SystemVerilog features with only SV-2009 and earlier keywords
+	-UNADORNED_CLASS_CHK         -- Detect SV rule about unadorned references to parameterized classes in scope operators
+	-UNCLOCKEDSVA                -- Unclocked assertion support in SystemVerilog
+	-UNIT <arg>                  -- Specifies the unit to be compiled upon invocation
+	-UPCASE                      -- Changes all identifiers to upper case (case insensitive)
+	-UPDATE                      -- Check if unit is up-to-date before writing
+	-UPTODATE_MESSAGES           -- print module name even if it is up-to-date
+	-USE5X                       -- Enable full 5.x library system operation
+	-UVMACCESS                   -- Enable uvm debug APIs
+	-UVMLINEDEBUG                -- Enable uvm line debug capabilities
+	-UVMPACKAGENAME <arg>        -- Provide UVM package name
+	-V01                         -- Turn off new Verilog-2005 keywords
+	-V1995                       -- Turn off new Verilog-2001 keywords
+	-V2001                       -- Turn off new Verilog-2005 keywords
+	-V95                         -- Turn off new Verilog-2001 keywords
+	-VERSION                     -- Prints the version number
+	-VIEW <arg>                  -- Specifies the view association
+	-VTIMESCALE <arg>            -- Define the initial timescale for files on the command line
+	-WORK <arg>                  -- Specifies the work library association
+	-XMALLERROR                  -- Increases the severity of all warnings to error.
+	-XMERROR <arg> [Deprecates: NCERROR] -- Increases the severity of a warning to an error
+	-XMFATAL <arg> [Deprecates: NCFATAL] -- Increases the severity of a warn/error to a fatal
+	-XMNOTE
+	-ZLIB <arg>                  -- Compress PAK file using level 1 to 9, with 1 being the default value
+	-ZPARSE <arg>                -- enable zparsing 
+
+  Examples:
+	-- To compile all the modules in source.v
+	   % xmvlog source.v
+	
+	-- To compile with informative messages
+	   % xmvlog -messages source.v
+

@@ -209,20 +209,24 @@ nc_CMD_sim:=$(nc_CMD_path)\
 	xmsim        \
 	Counter_tb
 
-nc1:
+nc1: clean
 	mkdir -p /tmp/simvision/
 	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
 	$(nc_CMD_build)
 	$(nc_CMD_sim)
 
-nc2:
+nc2: clean
 	mkdir -p /tmp/simvision/
 	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
-	$(nc_CMD_path)  xmvlog -message \
-		ttt/Counter_tb.v   \
-		ttt/Counter.v
-	$(nc_CMD_path)  ncelab +access+rwc -messages \
-		worklib.Counter_tb
-	$(nc_CMD_sim) 
-######################## nc : end
+	$(nc_CMD_path)  xmvlog \
+		-message \
+		ttt/Counter.v ttt/Counter_tb.v   
+	$(nc_CMD_path)  xmelab \
+		-NOLICSuspend -messages \
+		-access +r+w+c \
+		Counter_tb
+	$(nc_CMD_path)  xmsim \
+		-NOLICSuspend -message \
+		Counter_tb
+######################## nc : end  : -loadvpi 
 
