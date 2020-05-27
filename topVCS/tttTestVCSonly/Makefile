@@ -120,7 +120,9 @@ c clean:
 		xmverilog.history                                       \
 		xmverilog.log                                           \
 		xmvlog.log                                              \
-		xmsim.log                                              \
+		xmsim.log                                               \
+		.bpad/                                                  \
+		xmsim_*.err                                             \
 		innovus.log  innovus.log[0-9]*                          \
 		innovus.logv innovus.logv[0-9]*                         \
 		novas_dump.log                                          \
@@ -193,12 +195,13 @@ VRST_HOME=/e/eda2161/xce19.09
 nc_CMD_path:=\
 	$(LM_LICENSE_FILE)                          			\
 	VRST_HOME=$(VRST_HOME)   								\
-	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools/bin:$${PATH}   
+	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools.lnx86/bin:$${PATH}   
 
 nc_CMD_build:=$(nc_CMD_path) \
-	xmvlog        \
+	xmverilog        \
+	+access+r         \
 	ttt/Counter_tb.v   \
-	ttt/Counter.v
+	-c ttt/Counter.v
 
 nc_CMD_sim:=$(nc_CMD_path)\
 	xmsim        \
