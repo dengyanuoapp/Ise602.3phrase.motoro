@@ -1,0 +1,294 @@
+xmsim(64): 19.09-s001: (c) Copyright 1995-2019 Cadence Design Systems, Inc.
+  Usage:
+	xmsim [options] [lib.]cell[:view]
+
+  Options:
+	-64BIT                             -- Invoke 64 bit executable
+	-ABVCOVERON                        -- Enable cover directives
+	-ABVFAILURELIMIT <arg>             -- Limit failure count for assert/assume directives
+	-ABVFINISHLIMIT <arg>              -- Limit finish count for cover directives
+	-ABVGLOBALFAILURELIMIT <arg>       -- Limit global failure count
+	-ABVNORANGEOPT                     -- Disable performance optimization on assertions with ranges in their expression
+	-ABVNOSTATECHANGE <arg>            -- Suppress consecutive assertion state changes
+	-ABVOFF <arg>                      -- Completely stop specified assertions
+	-ABVOPTREPORTING                   -- Disable counter details for assertions.
+	-ABVRANGELIMIT <arg>               -- Treat range as unbounded above specified limit
+	-ABVRECORDCOVERALL                 -- Record all finishes for cover directives
+	-AMS_FLEX_RELEASE                  -- Enable AMS Flexible Release Matrix flow
+	-AMS_LORDER <arg>                  -- Specifies the promotion order for AMS license checkout (SAMSD:MMSIM:SAMSC)
+	-AMSDEBUG                          -- Generate readable call stack for AMS # Generate readable call stack for AMS
+	-AMSDIR <arg>                      -- Raw results directory for AMS
+	-AMSFORMAT <arg>                   --Set the waveform format used for TCL databases
+	-AMSOUTDIR <arg>                   -- Raw result directory for AMS and simulation output
+	-AMSVIVALOG                        -- To generate runObjFile 
+	-ANALOGCONTROL <arg>               -- Analog Simulation control file
+	-APPEND_KEY                        -- Append keystrokes to an existing keyfile
+	-APPEND_LOG                        -- Append the log to an existing logfile
+	-APS_ARGS <arg>                    -- arguments for the Aps solver
+	-ARMFM <arg>                       -- Allow simulation of given Fast Model from ARM (e.g. ARM926CT, ARMCortexM3CT, etc.) or invoke ARM model-specific capability (e.g. modeldebugger, rvdebug, debug, trace, image)
+	-ASSERT_COUNT_TRACES               -- Use trace-based counting for assertions
+	-ASSERT_LOGGING_ERROR_OFF          -- Change default severity from "Error" to "Note" for logging assertion failures
+	-BATCH                             -- Run simulation in batch mode (this is the default)
+	-BBOX_LINK
+	-CCIPARAM <arg>                    -- Associate values with SystemC cci parameters
+	-CDS_ALTERNATE_TMPDIR <arg>        -- Specify alternate directory for design data
+	-CDS_IMPLICIT_TMPDIR <arg>         -- Specify location for snapshot access
+	-CDSLIB <arg>                      -- Specifies the cds.lib file to be used
+	-CHECKPOINT_ENABLE                 -- Enables process-based checkpointing
+	-CMDFILE <arg>                     -- Search-path support
+	-COUNTDRIVERTRANS                  -- $countdrivers only counts connected tran gates with contributing drivers
+	-COV_DEBUGLOG                      -- To print coverage related information during different phases of simulation
+	-COV_UCISXML_INFO                  -- Generate coverage database with information required for UCIS-XML
+	-COVBASERUN <arg>                  -- Base run name for coverage results databases <covwork>/<covscope>/<<base_run>_sv<seed>>
+	-COVCLEANWORKDIR                   -- Remove the entire coverage directory including the coverage model and data files
+	-COVDESIGN <arg>                   -- Design Name for coverage results databases (see COVWORK and COVTEST) <covwork>/<covdesign>/<covtest>
+	-COVFIRSTBINMATCH                  -- To sample the first hit for a coverpoint/cross bin during a sampling event
+	-COVMODELDIR <arg>                 -- Path to coverage model/scope directory to use instead of the default model/scope directory 
+	-COVNOMODELDUMP                    -- Disable coverage design database (model) dumping
+	-COVOVERWRITE                      -- Enable overwriting of coverage output files and directories
+	-COVSCOPE <arg>                    -- Scope Name for coverage results databases (see COVWORK and COVTEST) <covwork>/<covscope>/<covtest>
+	-COVTEST <arg>                     -- Test Name for coverage results databases (see COVWORK and COVSCOPE) <covwork>/<covscope>/<covtest>
+	-COVWORKDIR <arg>                  -- Base Name for coverage results databases (see COVSCOPE and COVTEST) <covwork>/<covscope>/<covtest>
+	-DELAY_UDP_XMINITIALIZE  [Deprecates: DELAY_UDP_NCINITIALIZE] -- Delay effect of INITIALIZE on UDP by one delta cycle
+	-DISABLE_EXTEND_SELF               -- Disallow process::self() call from nonprocesses
+	-DISABLE_SV_TCL_DRIVER_FIXES       -- disable tcl drivers command fixes for certain expressions
+	-DPI_STACK_INT_C                   -- Lists internal C stack frames called from import function
+	-DUMPPORTS_FORMAT <arg>            -- Specify EVCD format flag for $dumpports
+	-DUMPSTACK                         -- Dump the stack on any internal error
+	-DUT_PROF <arg>                    -- generate profiler report with design unit summary.
+	-EMHIER_DVS                        -- Enable embedded hierarchical dynamic voltage supply
+	-ENABLE_PS_AP                      -- Correct datatype for part select for assignment pattern
+	-ENABLE_SVAOPSFIXES                -- Fix the behavior of SVA operators like EVENTUALLY/ALWAYS/IMPLIES/FOLLOWED-BY to algin with their LRM semantics.
+	-EPULSE_NO_MSG                     -- Suppress e-pulse error message
+	-ERRORMAX <arg>                    -- Specifies the maximum number of errors processed
+	-ERRTCL_VERBOSE                    -- Output Tcl command that produced the error
+	-ESW <arg>                         -- Associate a core for ESW debugging (<core>:<client>)
+	-EXCLUDE_FILE <arg>                -- Specify a list of instances to be excluded for initialization
+	-EXIT                              -- Always exit the simulator instead of issuing a TCL prompt
+	-EXTASSERTMSG                      -- Prints Extended Assert message Information 
+	-EXTEND_SELF                       -- Allow process::self() call from some nonprocesses
+	-FAULT_CHECKER_ON                  -- Enable checker strobe detection feature
+	-FAULT_CONC_MSGS <arg>             -- Max detection messages count for concurrent, max limit is 2^12
+	-FAULT_CONCURRENT                  -- Enable concurrent fault simulation
+	-FAULT_GEN_TEST_CONST              -- enable TB level-0 test based fault reduction optimization
+	-FAULT_GOOD_RUN                    -- Enable good simulation run when elaborated for fault injection
+	-FAULT_ID <arg>                    -- Specify unique node id to select fault node
+	-FAULT_LOGSIM <arg>                -- Specify a log file for fault simulation
+	-FAULT_MASTER_DB <arg>             -- Specify master fault work directory for creation of links
+	-FAULT_MAX_MSGS <arg>              -- Specify max count of messages to be displayed, max limit is 2^12
+	-FAULT_NUM_NODES <arg>             -- Specify number of faultable nodes affected by a fault
+	-FAULT_OVERWRITE                   -- Overwrites the existing fault work directory
+	-FAULT_RANDOM_ID <arg>             -- Specify random sequence id to select fault node(s)
+	-FAULT_SEED <arg>                  -- Specify random seed to randomize fault selection
+	-FAULT_SIM_RUN                     -- Enable fault simulation run when elaborated for fault injection
+	-FAULT_TEST <arg>                  -- Specify the test name for fault simulation run
+	-FAULT_TIMEOUT <arg>               -- Specify timeout to terminate a simulation run
+	-FAULT_TW <arg>                    -- Specify time window to apply fault
+	-FAULT_TYPE <arg>                  -- Specify fault model type for simulation
+	-FAULT_WORK <arg>                  -- Specify directory to save fault run results
+	-FILE <arg>                        -- Load command line arguments from <arg>
+	-GPROFILER                         -- Enable gperftool's CPU profiling
+	-GPROFOUT <arg>                    -- gperftool profiler data to be dumped to
+	-GUI                               -- Enter window mode before running simulation
+	-HDLVAR <arg>                      -- Specifies the hdl.var file to be used
+	-HELP                              -- Prints this message
+	-HIER_DVS                          -- Enable hierarchical dynamic voltage supply
+	-INPUT <arg>                       -- Script to be executed during initialization
+	-KEYFILE <arg>                     -- Specifies the file to capture keyboard input
+	-LAYOUT <arg>                      -- Launch GUI with a built-in window layout   
+	-LIC_USED                          -- Dump out the licenses checked out 
+	-LICENSE_ORDER <arg>               -- Specifies the promotion order NO_TOP or TOP_ONLY
+	-LICINFO                           -- Dump out the license requirements for this design
+	-LICQUEUE                          -- Use license queue mechanism
+	-LOADCFC <arg>                     -- Dynamically load a CFC application
+	-LOADFMI <arg>                     -- Dynamically load an FMI Library
+	-LOADPLI1 <arg>                    -- Specify the library_name:boot_routine(s) to dynamically load a PLI1.0 application
+	-LOADVHPI <arg>                    -- Dynamically load a VHPI application 
+	-LOADVPI <arg>                     -- Specify the library_name:boot_routine(s) to dynamically load a VPI application
+	-LOGFILE <arg>                     -- Specifies the file to contain log information
+	-LPS_1801_MSG <arg>                -- Specify a file for 1801 simulation messages
+	-LPS_ALT_SRR                       -- Enables alternate behavior for save/restore pre-conditions
+	-LPS_ATIME <arg>                   -- Specify a time to activate low power assertions
+	-LPS_CORRUPT_TIME0                 -- Enable 1801 corruption at time 0
+	-LPS_ENABLE_ASSERTION_CTRL         -- Enable assertion controls in low power suspend mode
+	-LPS_ENUM_RAND_CORRUPT <arg>       -- Corrupt VHDL enums with random values based on specified seed
+	-LPS_ENUM_RIGHT                    -- Corrupt VHDL enums with 'right values
+	-LPS_EXPR_FORCE_REAPPLY            -- Reapply HDL expression forces
+	-LPS_ISO_OFF                       -- Turn off port isolation
+	-LPS_ISO_VERBOSE                   -- Enable information reporting for isolation
+	-LPS_LOG_VERBOSE <arg>             -- Specify a log file for low power simulation LPS_VERBOSE or LPS_PSN_VERBOSE output 
+	-LPS_LOGFILE <arg>                 -- Specify a log file for low power simulation 
+	-LPS_OFF                           -- Turn off low power simulation
+	-LPS_PSN_VERBOSE <arg>             -- Specify a level of PSN information reporting
+	-LPS_PSO_FORCE_CHECK               -- Enable check when applying user force while power domain is OFF
+	-LPS_PST_VERBOSE                   -- Enable reporting additional PST info  
+	-LPS_REAL_NOCORRUPT                -- Disables corrupting REAL variables.
+	-LPS_RESOLUTION_NO_MESSAGE         -- Supress the run time custom supply net resolution debug info
+	-LPS_RESTORE_LEVEL                 -- Enable restoration started  at active edge for balloon style retention 
+	-LPS_REVERT_ERRORS2WARNINGS        -- Treat old warnings as warnings again for backward compatibility
+	-LPS_RTN_FULL_LOCK                 -- New model for retention lock
+	-LPS_RTN_LOCK                      -- Lock the retained reg value
+	-LPS_RTN_OFF                       -- Turn off state retention 
+	-LPS_SIM_VERBOSE <arg>             -- Specify a level of information reporting during simulation 
+	-LPS_SMARTLOG_DB <arg>             -- Specify a database name for IDA Smartlog
+	-LPS_SMARTLOG_ENABLE               -- Enable LP writing into IDA SMartlog DB
+	-LPS_STDBY_NOWARN                  -- Turn off warning for standby mode input violation
+	-LPS_STIME <arg>                   -- Specify a time to start low power simulation
+	-LPS_STL_OFF                       -- Turn off state loss 
+	-LPS_VERBOSE <arg>                 -- Specify a level of information reporting
+	-LPS_WREAL_CORRUPT_VALUE <arg>     -- Specify corrupt value of WREAL signals
+	-LPS_WREAL_NOCORRUPT               -- Disables corrupting WREAL signals
+	-MAX_TCHK_ERRORS <arg>             -- Specifies maximum number of timing violations
+	-MCDUMP                            -- Do SHM dumping on separate process
+	-MCE_QUALIFY <arg>                 -- Enable mce qualification.
+	-MEMDETAIL                         -- Add information about memory usage to profiler report
+	-MEMOPT                            -- Use reduced memory image size
+	-MERGE_DATABASE                    -- Merge sst2/psfxl_all database in save/restart.
+	-MESSAGES                          -- Specifies printing of informative messages
+	-MODELPATH <arg>                   -- to specify a list of source files/directories of source files [with/without section identifiers]
+	-MTD_OPTIONS <arg>                 -- Quoted string of options for MTD
+	-NEVERWARN                         -- Disables printing of all warning messages
+	-NEWPERF                           -- Umbrella option for new performance optimizations
+	-NO_SDFA_HEADER                    -- Do not print the SDF annotation header
+	-NOCIFCHECK                        -- Disables constraint checking in VDA functions for increased performance
+	-NOCOPYRIGHT                       -- Suppresses printing of copyright banner
+	-NOIEVLIC                          -- Specifies that IEV license must not be added in the promotion order
+	-NOKEY                             -- Suppress generation of the default keyfile
+	-NOLICPROMOTE                      -- Deprecated Switch- Does not affect Xcelium licensing 
+	-NOLICSUSPEND                      -- disable suspending licenses for SIGTSTP
+	-NOLOG                             -- Suppress generation of the default logfile
+	-NOMTDUMP                          -- Disable multi-threaded SHM dumping.
+	-NONTCGLITCH                       -- Suppress delayed net glitch suppression messages
+	-NOSOURCE                          -- Do not check source file timestamps (with -UPDATE)
+	-NOSTDOUT                          -- Turn off output to screen
+	-NOTIMEZEROASRTMSG                 -- Suppress printing of time zero assert messages from all built in functions
+	-NOWARN <arg>                      -- Disables printing of the specified warning message
+	-NTC_SIM_VERBOSE                   -- Show additional NTC verbose messages during simulation
+	-NTC_VERBOSE                       -- Show limits changed by the NTC algorithm in order to  make a circuit converge
+	-OMICHECKINGLEVEL <arg>            -- Specify OMI checking level {Min, Std, Max}
+	-OVP <arg>                         -- Allow simulation of given OVP model
+	-PASSWORD                          -- Prompt for simulation password for SimVision walk-up connections
+	-PERFLOG <arg>                     --     Writes performance statistics in the specified file
+	-PERFSTAT                          -- Writes performance statistics in xmperfstat.out
+	-PLI_EXPORT                        -- Export symbols from loadpli, loadvpi
+	-PLIDEBUG                          -- enable PLI debugging mode for -profile
+	-PLIERR_VERBOSE                    -- Expand handle info in PLI/VPI/VHPI messages
+	-PLIMAPFILE <arg>                  -- Specify the mapping (Table) file to load 
+	-PLINOOPTWARN                      -- Do not print pli messages caused by limited visibility
+	-PLINOWARN                         -- Do not print pli warning and error messages
+	-PLIVERBOSE                        -- Verbose information about PLI1.0 and VPI task and function registration
+	-PLUSPERF                          -- Umbrella option for simulation perf optimizations
+	-PMR                               -- Switch on partition and multi-rate simulation in analog kernel (This option is no longer supported)
+	-PPDB <arg>                        -- Enter PPE mode with the specified database open
+	-PPE                               -- Enter PPE mode which means no active simulation just a gui
+	-PROCESS_SAVE                      -- Enables process-based save and restart
+	-PROF_DUMP_INTERVAL <arg>          -- dump profiler report after every x seconds
+	-PROF_DUMP_ONCE <arg>              -- dump profiler report in one shot after x seconds
+	-PROF_INTERVAL <arg>               -- Set cpu (unit: microsecond, 2000 default) / memory(unit: KB, 10KB default) profiling interval.
+	-PROF_MEM_CALLGRAPH                -- Enable the callgraph in memory profiler
+	-PROF_MEM_DUMP_BEFORE_MEM_EXHAUST  -- dump db before virtual memory exhaustion in memory profiler
+	-PROF_WORK <arg>                   -- Change root xprof database folder name from default (xprof_report_dir)
+	-PROFILE                           -- generate a run time profile of the design
+	-PROFOUTPUT <arg>                  -- Specifies the file to contain profiling information
+	-PROFSOFILTER <arg>                -- filter out profiler hits on .so
+	-PROFTHREAD                        -- Allow Threaded processes to profile
+	-QUIET                             -- No error/warning summary output
+	-RANDWARN                          -- Enable all SV randomize failure warnings
+	-REDMEM                            -- Deprecated option - no impact
+	-RUN                               -- Begin simulation automatically with interactive or window mode
+	-SAVEVPCONFIG <arg>                -- Save current virtual platform design configuration
+	-SC_MAIN_STACKSIZE <arg>           -- Set SystemC sc_main() stack size, default is 0x400000
+	-SC_THREAD_STACKSIZE <arg>         -- Set SystemC SC_THREAD stack size, default is 0x16000
+	-SCCONFIG <arg>                    -- Specify SystemC parameter configuration file 
+	-SCDEPENDENCY <arg>                -- Specify link dependency information
+	-SCDUMPSTATICTOP <arg>             -- Generate SystemC source code for a Dynamic Subsystem specified with -SCCONFIG option
+	-SCIDA                             -- Enable Indago flow for pure SystemC design
+	-SCINITBIDIRTOZ                    -- Initialize SystemC bidir ports to 'Z' when connected to HDL parent scope
+	-SCPROCESSCB                       -- Enable SystemC Process callbacks feature
+	-SCPROCESSORDER <arg>              -- Allow SystemC process order to vary to help detect race conditions
+	-SCPROFCOUNT                       -- Enable SystemC dynamic activity count
+	-SCREGISTERPROBERECORDALL <arg>    -- Turn recording all sc_register value changes in probe on/off
+	-SCSYNCEVERYDELTA <arg>            -- Turn Delta cycle accuracy on/off
+	-SCTLMCHECK                        -- Enable TLM2 Checks and Information messages
+	-SCTLMDBNAME <arg>                 -- Specify a database name for the TLM transaction recording
+	-SCTLMMMAP <arg>                   -- Specify a memory map file for sctlmperf
+	-SCTLMNODATA                       -- Exclude the data attribute when tracing TLM to save space and speed simulation
+	-SCTLMPERF                         -- Enable SystemC TLM performance analysis 
+	-SCTLMPROBE                        -- Enable SystemC TLM sockets for extensible debugging via tcl command line 
+	-SCTLMRECORD                       -- Enable SystemC TLM tracing mode 
+	-SCVERBOSITY <arg>                 -- Specify SystemC reporting verbosity
+	-SDF_NO_WARNINGS                   -- Do not report SDF warnings
+	-SDF_VERBOSE                       -- Include detailed information in SDF log file
+	-SHM_FILTER_GROUP <arg>            --  Defines global filter group for real value probe filtering.  
+	-SIMCOMPATIBLE_AMS <arg>           -- Specify compatibility language hspice or spectre. Default is spectre for AMSSpectre simulator and hspice for AMSUltra simulator
+	-SIMINCFILE <arg>                  -- Number of files after which overwriting begins
+	-SIMLOGSIZE <arg>                  -- Specifies the simulation file size limit in Megabytes
+	-SIMTFILE <arg>                    -- To control the delay on port at runtime
+	-SIMVISARGS <arg>                  -- Quoted string of SimVision cmdline arguments 
+	-SNDYNNOW                          -- Flag to let specman know that it needs to load libraries with RTLD_NOW
+	-SNLOGAPPEND                       -- Append the log files from previously saved snapshot to the current log files 
+	-SNPROFILEARGS <arg>               -- Arguments for the specman profiler
+	-SNPROFILECPU                      -- Tell specman to run its profiler
+	-SNPROFILEMEM                      -- Tell specman memory profiler to run
+	-SOLVER <arg>                      -- to pass in solver to be used for the user
+	-SPECTRE_ARGS <arg>                -- arguments for the Spectre solver
+	-SPICETOP                          -- Indicate spice on top flow.
+	-SPROFILE                          -- Generate a VHDL Source Profile
+	-STACKSIZE <arg>                   -- maximum size for the pli stack
+	-STATUS                            -- print out the runtime status at the end
+	-SV_LIB <arg>                      -- Dynamically load a DPI Library
+	-SV_ROOT <arg>                     -- Specify root path for -sv_lib switch
+	-SVRNC <arg>                       -- Set SystemVerilog randomization and constraints options
+	-SVSEED <arg>                      -- Set SystemVerilog default RNG seed
+	-SWDEVELOPER                       -- Use VSP Software Developer license
+	-SYNCALL <arg>                     -- Synchronize all compatible signals and transactions
+	-TCL                               -- Enter interactive mode before running simulation
+	-TIMEUNIT_CASE                     -- Prints the time units from std.textio write procedure in upper case characters
+	-TLMCPU <arg>                      -- Register given TLM CPU to allow software/hardware co-debug or associate software image with given TLM CPU
+	-ULTRASIM_ARGS <arg>               -- arguments for the Ultrasim solver
+	-UNBUFFERED                        -- Do not buffer output
+	-UPDATE                            -- Verify snapshot and update if necessary
+	-UPTODATE_MESSAGES                 -- print out modules that are up-to-date (with -UPDATE)
+	-USE_IEEE_DUMPPORT_IDS             -- Dump $dumpports port ids as per IEEE format
+	-USE_NEW_DUMPPORTS                 -- IUS 14.2: deprecated
+	-USE_OLD_DUMPPORTS                 -- IUS 14.2: enable old $dumpports implementation
+	-USELICENSE <arg>                  -- Deprecated Switch- Does not affect Xcelium licensing
+	-USESCTIMEUNIT <arg>               -- Turn SystemC time resolution mode on/off
+	-UVMPACKAGENAME <arg>              -- Provide UVM package name
+	-VCDEXTEND                         -- Left-extend all vectors in VCD files
+	-VCLASS_EXT                        -- Display derived class instead of base class 
+	-VERSION                           -- Prints the version number
+	-VPICOMPAT <arg>                   -- Specify the VPI compatibility mode (IEEE Standard version) default
+	-VSOF_DIR <arg>                    -- To write the vsof file at the specified directory.
+	-VSPDEBUG <arg>                    -- VSP Virtual Platform Debug and Analysis mode <off|all|fast>
+	-WRITE_METRICS                     -- To dump the vsof (verification session output) file which is an input for emanager.
+	-XCELIGEN <arg>                    -- Set SystemVerilog randomization and constraints options
+	-XEDEBUG                           -- xeDebug mode in IXCOM flow
+	-XLOG <arg>                        -- Logs X-Prop activity in specified log file
+	-XLSTYLE_UNITS                     -- XL style display of time values, same as tcl set display_unit xlstyle
+	-XM_NO_SOFT_ERR                    -- Treat all soft errors as warnings for backwards compatibility
+	-XMALLERROR                        -- Increases the severity of all warnings to error
+	-XMERROR <arg> [Deprecates: NCERROR] -- Increases the severity of a warning to an error
+	-XMFATAL <arg> [Deprecates: NCFATAL] -- Increases the severity of a warn/error to a fatal
+	-XMHIERARCHY <arg> [Deprecates: NCHIERARCHY] -- Specify the hierarchy level from which to start initiallizing the values of the variables.
+	-XMINIT_FILE <arg>                 -- Specify a file name for custom initialization commands
+	-XMINIT_LOG <arg>                  -- Specify a file name to record the initialized variables 
+	-XMINITIALIZE <arg> [Deprecates: NCINITIALIZE] -- Specify the value to which all the variables will be initialized
+	-XMNOTE <arg> [Deprecates: NCNOTE] -- Decreases the severity of a warning to a note
+	-XMREPLAY_FILE <arg>               -- This option specifies a file that contains the list of options to replay model
+	-XMWARN <arg> [Deprecates: NCWARN] -- Decreases the severity of a soft error to a warning
+	-XVERBOSE                          -- Logs X-Prop activity in simulation log file
+	-ZLIB <arg>                        -- Compress PAK file using level 1 to 9, with 1 being the default value
+
+  Examples:
+	-- To simulate the snapshot my_lib.top:snap
+	   % xmsim my_lib.top:snap
+	   % xmsim my_lib.top
+	   % xmsim top
+	
+	-- To simulate while writing to the log file ./xmsim.log
+	   % xmsim -log ./xmsim.log my_lib.top:snap
+	
+	-- To update the snapshot my_lib.top:snap and simulate
+	   % xmsim -update my_lib.top:snap
+
