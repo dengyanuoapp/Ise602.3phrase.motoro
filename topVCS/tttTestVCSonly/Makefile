@@ -2,6 +2,11 @@
 LM_LICENSE_FILE?=LM_LICENSE_FILE=56789@127.0.0.1
 
 
+
+#/e/eda2151/QUANTUS20/quantus20/bin/quantusui
+QUANTUS_HOME=/e/eda2151/QUANTUS20/quantus20
+OA_UNSUPPORTED_PLAT:=OA_UNSUPPORTED_PLAT=linux_rhel60
+
 INNOVUS_HOME:=/e/eda2141/nowDIR
 INNOVUS_HOMEbin1:=$(INNOVUS_HOME)/bin
 INNOVUS_HOMEbin2:=$(INNOVUS_HOME)/tools.lnx86/bin
@@ -74,6 +79,10 @@ dcdc         -->>>    $(dcdc)
 dcdc2        -->>>    $(dcdc2)  2018.06 , the last version without CTR SIGN=...
 dcdc3        -->>>    $(dcdc3)
 
+qut          -->>>    QUANTUS_HOME=/e/eda2151/QUANTUS20/quantus20 , OA_UNSUPPORTED_PLAT:=OA_UNSUPPORTED_PLAT=linux_rhel60
+
+nc           -->>>    ncverilog
+
 endef
 export show_help_text
 
@@ -103,6 +112,13 @@ m: Makefile
 
 c clean:
 	rm -fr                                                      \
+		allegro.jrl                                             \
+		allegro.jrl,1                                           \
+		license_use.log                                         \
+		qrc.log                                                 \
+		xcelium.d/                                              \
+		xmverilog.history                                       \
+		xmverilog.log                                           \
 		innovus.log  innovus.log[0-9]*                          \
 		innovus.logv innovus.logv[0-9]*                         \
 		novas_dump.log                                          \
@@ -160,3 +176,24 @@ dcdc_CMD = \
 dcdc :
 	$(dcdc_CMD)
 ######################## dcdc dcdc2 dcdc3 : end
+
+######################## qut : begin
+qut_CMD:=\
+	$(LM_LICENSE_FILE)                          \
+	$(OA_UNSUPPORTED_PLAT)                      \
+	$(QUANTUS_HOME)/bin/quantusui
+qut:          
+	$(qut_CMD)
+######################## qut : end
+
+VRST_HOME=/e/eda2161/xce19.09
+######################## nc : begin
+nc_CMD:=\
+	$(LM_LICENSE_FILE)                          			\
+	VRST_HOME=$(VRST_HOME)   								\
+	PATH=$(VRST_HOME)/bin:$(VRST_HOME)/tools/bin:$${PATH}   \
+	xmverilog     ttt/Counter.v
+nc:
+	$(nc_CMD)
+######################## nc : end
+
