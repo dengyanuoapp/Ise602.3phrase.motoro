@@ -81,7 +81,8 @@ dcdc3        -->>>    $(dcdc3)
 
 qut          -->>>    QUANTUS_HOME=/e/eda2151/QUANTUS20/quantus20 , OA_UNSUPPORTED_PLAT:=OA_UNSUPPORTED_PLAT=linux_rhel60
 
-nc           -->>>    ncverilog
+nc1           -->>>    ncverilog
+nc2           -->>>    nclog
 
 endef
 export show_help_text
@@ -121,6 +122,7 @@ c clean:
 		xmverilog.log                                           \
 		xmvlog.log                                              \
 		xmsim.log                                               \
+		xmelab.log                                              \
 		.bpad/                                                  \
 		xmsim_*.err                                             \
 		innovus.log  innovus.log[0-9]*                          \
@@ -207,10 +209,20 @@ nc_CMD_sim:=$(nc_CMD_path)\
 	xmsim        \
 	Counter_tb
 
-nc:
+nc1:
 	mkdir -p /tmp/simvision/
 	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
 	$(nc_CMD_build)
 	$(nc_CMD_sim)
+
+nc2:
+	mkdir -p /tmp/simvision/
+	[ -L ~/.simvision ] || ln -s /tmp/simvision/ ~/.simvision
+	$(nc_CMD_path)  xmvlog -message \
+		ttt/Counter_tb.v   \
+		ttt/Counter.v
+	$(nc_CMD_path)  ncelab +access+rwc -messages \
+		worklib.Counter_tb
+	$(nc_CMD_sim) 
 ######################## nc : end
 
